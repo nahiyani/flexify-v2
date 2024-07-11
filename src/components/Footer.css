@@ -1,0 +1,108 @@
+.footer {
+  background-color: #8E46C6;
+  color: white;
+  padding: 40px 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-section {
+  margin-bottom: 20px;
+}
+
+.footer h5 {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.footer .subscribe-title {
+  font-size: 1.5em;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.social-media-section h5 {
+  text-align: center;
+  font-size: 2em;
+}
+
+.social-icons {
+  text-align: center;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.social-icons a:hover {
+  color: #f8f9fa;
+}
+
+.footer ul {
+  padding: 0;
+}
+
+.footer ul li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.footer ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer .form-control {
+  margin-bottom: 10px;
+  border-radius: 20px;
+  padding: 8px;
+  font-size: 14px;
+  width: 100%;
+  padding-left: 15px; 
+}
+
+.footer-button {
+  background-color: white;
+  color: #8E46C6;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: 700;
+  margin-left: 10px; 
+  height: calc(100% - 20px); 
+}
+
+.footer-button:hover {
+  background-color: #f8f9fa;
+  color: #8E46C6;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.subscribe-section {
+  margin-top: 30px;
+}
+
+.email-input-group {
+  width: 50%; 
+  display: inline-block; 
+  margin-right: 10px; 
+  vertical-align: top; 
+  height: 60px;
+}
+
+.email-input-group .form-control {
+  height: calc(100% - 16px); 
+}

@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+}
+
+.reserve-container {
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.headline {
+    font-size: 75px;
+    font-weight: bold;
+}
+
+.description {
+    margin-bottom: 20px; 
+}
+
+.reserve-form {
+    border: 3px solid #8E46C6;
+    padding: 50px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    background-color: white;
+}
+
+.form-title {
+    font-weight: bold;
+    margin-bottom: 10px; 
+}
+
+.confirm-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    margin-top: 20px;
+    background-color: #8E46C6;
+    border-color: #8E46C6;
+    color: white; 
+}
+
+.confirm-button:hover {
+    background-color: white; 
+    border: 1px solid #8E46C6;
+    color: #8E46C6; 
+}
+
+.form-group-spacing {
+    margin-bottom: 30px; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.purple-datepicker {
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.purple-datepicker-calendar {
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.purple-datepicker .selected {
+    background-color: #8E46C6;
+    color: white;
+}
+
+.date-picker-container {
+    margin-bottom: 30px; 
+}
+
+.date-picker-container .form-title {
+    display: block;
+    margin-bottom: 10px; 
+}
+
+.date-picker-container .form-control {
+    width: 100%;
+}
+
+.time-picker-container {
+    margin-bottom: 30px; 
+}
+
+.time-picker-container .form-title {
+    display: block;
+    margin-bottom: 10px; 
+}
+
+.time-picker-container .form-control {
+    width: 100%;
+}
+
+.expiry-cvv-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.expiry-cvv-container .form-group {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.expiry-cvv-container .form-group:last-child {
+    margin-right: 0;
+}
+
+.expiry-cvv-container .form-control {
+    width: 100%;
+}

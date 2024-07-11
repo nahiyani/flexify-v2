@@ -1,0 +1,141 @@
+.fitness-studio {
+  font-family: 'Poppins', sans-serif;
+}
+
+.main-header{
+  font-size: 55px !important;
+}
+
+.hero-section {
+  background-image: url('../images/hompage-image.webp');
+  background-size: cover;
+  height: 500px;
+  color: white;
+  padding: 60px 0;
+  background-size: cover;
+}
+
+.hero-section h1 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+}
+
+.hero-section p {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.featured-classes {
+  background-color: #8E46C6;
+  color: white;
+  padding: 30px 0;
+}
+
+.featured-classes h2 {
+  font-size: 75px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.featured-classes .card {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.featured-classes .card .placeholder-image {
+  width: 90%;
+  height: 200px; /* Adjust height as needed */
+  background-color: #ccc;
+  margin: 20px auto 0;
+  border-radius: 15px;
+}
+
+.instructors-section {
+  padding: 30px 0;
+}
+
+.instructors-section h2 {
+  font-size: 75px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.instructors-section .card {
+  margin-bottom: 20px;
+  position: relative;
+  border: 2px solid #8E46C6;
+  border-radius: 15px;
+}
+
+.instructors-section .card .placeholder-image {
+  width: 90%;
+  height: 200px; 
+  background-color: #ccc;
+  margin: 20px auto 0;
+  border-radius: 10px;
+}
+
+.testimony-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  padding: 30px 0; 
+  background-color: #f8f9fa;
+}
+
+.testimony-section h2 {
+  font-size: 75px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.testimonial-picture {
+  width: 250px; 
+  height: 250px; 
+  background-color: #ccc;
+  border-radius: 50%; 
+  margin: 20px -75px auto;
+}
+
+.testimony-section .blockquote {
+  text-align: left;
+}
+
+.purple-button {
+  background-color: #8E46C6 !important;
+  color: white !important;
+  width: 25% !important;
+  border-radius: 15px !important;
+  text-decoration: none; 
+  font-weight: bold;
+}
+
+.purple-button:hover {
+  background-color: white !important;
+  color: #8E46C6 !important;
+  border: 2px solid #8E46C6 !important;
+  text-decoration: none; 
+  font-weight: bold;
+}
+
+.white-button {
+  background-color: white !important;
+  color: #8E46C6 !important;
+  border: 2px solid #8E46C6 !important;
+  width: 25% !important;
+  border-radius: 15px !important;
+  text-decoration: none; 
+  font-weight: bold;
+}
+
+.white-button:hover {
+  background-color: white !important;
+  color: #8E46C6 !important;
+  border: 2px solid #8E46C6 !important;
+  text-decoration: none;
+  font-weight: bold;
+}

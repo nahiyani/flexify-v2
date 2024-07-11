@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+body {
+  background-color: #f8f9fa;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.library-intro {
+  padding-bottom: 30px;
+  width: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+.library-title {
+  color: black;
+  font-size: 75px;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.articles-section {
+  background-color: #8E46C6;
+}
+
+.podcasts-section {
+  background-color: #8E46C6;
+}
+
+.articles-section,
+.guides-section,
+.podcasts-section,
+.bmi-calculator-section {
+  padding: 40px 0;
+}
+
+.articles-row,
+.podcasts-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  width: 75%;
+  padding-bottom: 30px;
+}
+
+.article-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  flex: 1 1 30%;
+  max-width: 30%;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.black-text {
+  color: #000;
+}
+
+.placeholder-img {
+  width: 100%;
+  height: 200px;
+  background-color: #ccc;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 20px;
+}
+
+.learn-more-btn {
+  background-color: #8E46C6;
+  color: #fff;
+  border: none;
+  width: 100%;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.learn-more-btn:hover {
+  background-color: #fff;
+  color: #8E46C6;
+  border: 2px solid #8E46C6;
+}
+
+.learn-more-guides-btn {
+  background-color: #8E46C6;
+  color: #fff;
+  border: none;
+  width: 25%;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.learn-more-guides-btn:hover {
+  background-color: #fff;
+  color: #8E46C6;
+  border: 2px solid #8E46C6;
+}
+
+.explore-all-articles-btn {
+  background-color: #fff;
+  color: #8E46C6;
+  border: none;
+  width: 25%;
+  text-align: center;
+  justify-content: center;
+  transition: background-color 0.3s, color 0.3s;
+  margin: 0 auto;
+  display: block;
+}
+
+.explore-all-articles-btn:hover {
+  background-color: #fff;
+  color: #8E46C6;
+  border: none;
+}
+
+.article-description {
+  margin-bottom: 20px;
+}
+
+.guides-section {
+  background-color: #fff;
+  color: #000;
+}
+
+.guides-carousel {
+  text-align: center;
+}
+
+.guide-card {
+  background-color: #fff;
+  border: 2px solid #8E46C6;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+}
+
+.guide-img {
+  width: 100%;
+  height: 200px;
+  background-color: #ccc;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+}
+
+.podcasts-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.podcast-card {
+  flex: 1;
+  max-width: 31%;
+  border-radius: 15px;
+}
+
+.podcasts-title {
+  font-size: 75px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.bmi-calculator-section {
+  background-color: #fff;
+  color: #000;
+  padding: 40px 0;
+}
+
+.bmi-title {
+  color: #8E46C6;
+}
+
+.bmi-form {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+.bmi-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.bmi-label {
+  color: #8E46C6;
+  margin-top: 20px;
+}
+
+.bmi-input {
+  border: 2px solid #8E46C6;
+  width: 100%;
+  max-width: 300px;
+}
+
+.calculate-btn {
+  background-color: #8E46C6;
+  margin-top: 25px;
+  color: #fff;
+  width: 15%;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.calculate-btn:hover {
+  background-color: #fff;
+  color: #8E46C6;
+  border: 2px solid #8E46C6;
+}
+
+.bmi-result {
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 50%;
+  margin: 20px auto;
+}
+
+.bmi-number {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.bmi-text {
+  font-size: 2.5rem;
+}
+
+.white-title {
+  font-size: 75px;
+  font-weight: bold;
+  color: white;
+}
+
+.purple-title {
+  font-size: 75px;
+  font-weight: bold;
+  color: #8E46C6;
+}

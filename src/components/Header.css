@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo-image {
+    width: 40%;
+    height: 7%;
+  }
+
+.main-nav {
+    background-color: #8E46C6;
+    padding: 20px 0; 
+}
+
+.brand, .nav-link-custom {
+    color: white !important;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out; 
+}
+
+.brand {
+    position: relative;
+    padding-left: 20px;
+    font-weight: 800; 
+    color: white; 
+}
+
+.nav-list {
+    display: flex;
+    gap: 20px; 
+}
+
+.nav-list .nav-item .nav-link-custom {
+    padding: 10px 15px; 
+    transition: color 0.5s ease-in-out, background-color 0.3s ease-in-out; 
+    font-weight: 700; 
+    border-radius: 5px; 
+    position: relative; 
+    text-align: center; 
+}
+
+.nav-list .nav-item .nav-link-custom::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: white;
+    position: absolute;
+    bottom: -5px; 
+    left: 50%;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.nav-list .nav-item .nav-link-custom:hover {
+    color: #8E46C6 !important; 
+    background-color: white; 
+    text-decoration: none;
+}
+
+.nav-list .nav-item .nav-link-custom:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.nav-list .nav-item:hover .nav-link-custom {
+    background-color: white; 
+    color: #8E46C6 !important; 
+    text-decoration: none;
+}
