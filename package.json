@@ -1,5 +1,6 @@
 {
- "name": "flexify-final",
+ "homepage": "https://nahiyani.github.io/flexify-v2",
+"name": "flexify-final",
  "version": "0.1.0",
  "private": true,
  "dependencies": {
