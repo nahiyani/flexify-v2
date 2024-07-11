@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/flexify-v2/static/css/main.a15e4160.css",
+    "main.js": "/flexify-v2/static/js/main.f5e5dc12.js",
+    "static/js/488.6e98a11e.chunk.js": "/flexify-v2/static/js/488.6e98a11e.chunk.js",
+    "static/media/zaralarsson.jpg": "/flexify-v2/static/media/zaralarsson.afc64e033c292e45e8f5.jpg",
+    "static/media/willsmith.png": "/flexify-v2/static/media/willsmith.96b7d5fa5e99a36a1b7b.png",
+    "static/media/hughjackman.png": "/flexify-v2/static/media/hughjackman.ef5da24f672361b2cc8d.png",
+    "static/media/jenniferlopez.webp": "/flexify-v2/static/media/jenniferlopez.09c2bab3b3bc697a3bff.webp",
+    "static/media/arnold.png": "/flexify-v2/static/media/arnold.8282be145342615f3ea2.png",
+    "static/media/ericwinter.webp": "/flexify-v2/static/media/ericwinter.14f47698a1ff94e374e2.webp",
+    "static/media/instructors-image.jpg": "/flexify-v2/static/media/instructors-image.fae571a6329f6f32e2c2.jpg",
+    "static/media/emmawatson.webp": "/flexify-v2/static/media/emmawatson.72fc4e6a9a4e4a2cb188.webp",
+    "static/media/meganfox.jpg": "/flexify-v2/static/media/meganfox.8b7a80807b7d99861931.jpg",
+    "static/media/sofiavergara.jpg": "/flexify-v2/static/media/sofiavergara.bad04ff7936f0bdb2429.jpg",
+    "static/media/timotheechalametfake.jpg": "/flexify-v2/static/media/timotheechalametfake.d30a96167fe7c10270a0.jpg",
+    "static/media/anadearmas.avif": "/flexify-v2/static/media/anadearmas.685c4f735b43e99b6fe7.avif",
+    "static/media/scarlettjohansson.webp": "/flexify-v2/static/media/scarlettjohansson.0280a036644e801be7de.webp",
+    "static/media/dwaynejohnson.webp": "/flexify-v2/static/media/dwaynejohnson.a94a8508debce750d63f.webp",
+    "static/media/tomholland.webp": "/flexify-v2/static/media/tomholland.b149873bdc25cac93ee8.webp",
+    "static/media/aubreygraham.jpg": "/flexify-v2/static/media/aubreygraham.ab747e508db1f2b787a1.jpg",
+    "static/media/jenniferlawrence.webp": "/flexify-v2/static/media/jenniferlawrence.8506c3f9910ad278d282.webp",
+    "static/media/flexifylogo.png": "/flexify-v2/static/media/flexifylogo.cc4800af5f01216b53e4.png",
+    "static/media/hompage-image.webp": "/flexify-v2/static/media/hompage-image.c3684e231c3d0bde5e3b.webp",
+    "index.html": "/flexify-v2/index.html",
+    "main.a15e4160.css.map": "/flexify-v2/static/css/main.a15e4160.css.map",
+    "main.f5e5dc12.js.map": "/flexify-v2/static/js/main.f5e5dc12.js.map",
+    "488.6e98a11e.chunk.js.map": "/flexify-v2/static/js/488.6e98a11e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a15e4160.css",
+    "static/js/main.f5e5dc12.js"
+  ]
+}
