@@ -3,6 +3,10 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import './AboutUs.css';
 
+import theRock from '../images/therock.jpg'
+import ryanReynolds from '../images/ryanreynolds.jpg'
+import tomBrady from '../images/tombrady.jpg'
+
 const AccordionItem = ({ title, content, isOpen, onClick }) => {
   return (
     <div className="accordion-item">
@@ -27,16 +31,16 @@ const AboutUs = () => {
 
   const accordionItems = [
     {
-      title: 'ADVANTAGE #1',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      title: 'COMPREHENSIVE CLASS VARIETY',
+      content: 'Flexify offers a wide range of fitness classes that cater to all levels, including yoga, pilates, HIIT, and strength training. This diverse selection ensures users can find the right fit to meet their fitness goals and stay engaged with their workout routine.'
     },
     {
-      title: 'ADVANTAGE #2',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      title: 'EXPERT INSTRUCTORS',
+      content: "Flexify's certified fitness professionals are experts in their fields, providing top-tier guidance and motivation. Users receive personalized instruction in both live sessions and on-demand classes, akin to having a personal trainer at home."
     },
     {
-      title: 'ADVANTAGE #3',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      title: 'FLEXIBLE AND ACCESSIBLE',
+      content: "Flexify's fully virtual platform allows users to access fitness classes anytime, anywhere, fitting seamlessly into any schedule. The user-friendly app and website make managing workouts convenient, ensuring fitness is accessible and straightforward for everyone."
     }
   ];
 
@@ -63,12 +67,11 @@ const AboutUs = () => {
           <div className='our-story-container'>
           <h2 className="our-story-title">OUR STORY</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Flexify was born when Dwayne "The Rock" Johnson envisioned a fitness platform accessible to all. 
+          Inspired by his journey from wrestler to actor, he aimed to create a space where people could train 
+          with top instructors anytime, anywhere. With his relentless drive and commitment to fitness, Flexify 
+          now offers diverse, live and on-demand classes, helping users achieve their goals with the same 
+          discipline and passion that fueled The Rock's success.
           </p>
           </div>
         </div>
@@ -77,42 +80,45 @@ const AboutUs = () => {
           <h2>MEET THE EXECUTIVES</h2>
           <div className="executives">
             <div className="executive-card">
-              <div className="executive-photo"></div>
-              <h3>THE ROCK</h3>
+            <div className="executive-photo">
+              <img src={theRock} alt="Dwayne Johnson" />
+            </div>
+              <h3>DWAYNE JOHNSON</h3>
               <h4>Chief Executive Officer</h4>
               <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Renowned for his incredible journey from wrestling champion to Hollywood star, 
+              Dwayne Johnson founded Flexify to make top-tier fitness accessible to all. His 
+              dedication, discipline, and relentless drive inspire the platform, offering a diverse 
+              range of classes to help users achieve their fitness goals with the same passion that 
+              fuels his success.
               </p>
             </div>
             <div className="executive-card">
-              <div className="executive-photo"></div>
+            <div className="executive-photo">
+              <img src={ryanReynolds} alt="Ryan Reynolds" />
+            </div>
               <h3>RYAN REYNOLDS</h3>
               <h4>Chief Operating Officer</h4>
               <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              As Flexify's COO, Ryan Reynolds brings his sharp wit and business acumen to the team. 
+              Known for his charismatic acting career and entrepreneurial ventures, Ryan ensures 
+              seamless operations and innovative strategies at Flexify. His commitment to wellness 
+              and creativity helps drive the company's mission to provide engaging, high-quality 
+              fitness experiences to users worldwide.
               </p>
             </div>
             <div className="executive-card">
-              <div className="executive-photo"></div>
+              <div className="executive-photo">
+                <img src={tomBrady} alt="Tom Brady" />
+              </div>
               <h3>TOM BRADY</h3>
               <h4>Chief Financial Officer</h4>
               <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Legendary quarterback Tom Brady, now Flexify's CFO, applies his strategic mindset 
+              and competitive spirit to the company's financial leadership. With an illustrious 
+              career in the NFL, Tom's expertise in performance and resilience translates into robust 
+              financial strategies for Flexify, ensuring sustainable growth and the continued delivery 
+              of exceptional fitness programs to its users.
               </p>
             </div>
           </div>

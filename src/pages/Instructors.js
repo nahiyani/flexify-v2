@@ -74,7 +74,7 @@ export default function Instructors() {
                     <img src={instructor.image} alt={instructor.name} />
                   </div>
                   <Card.Body>
-                    <Card.Title>{instructor.name}</Card.Title>
+                    <Card.Title className='instructor-name'>{instructor.name}</Card.Title>
                     <Card.Subtitle className="mb-2">{instructor.specialty1}</Card.Subtitle>
                     <Card.Subtitle className="mb-2">{instructor.specialty2}</Card.Subtitle>
                   </Card.Body>

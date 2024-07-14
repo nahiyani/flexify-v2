@@ -117,6 +117,7 @@ h2 {
     text-align: center;
     margin-bottom: 20px;
     position: relative;
+    height: 675px;
 }
 
 .executive-card h3 {
@@ -139,6 +140,12 @@ h2 {
     border-radius: 50%;
     margin: 0 auto 15px;
 }
+
+.executive-photo img {
+    width: 100%; /* Ensures the image covers the width */
+    height: 100%; /* Ensures the image covers the height */
+    object-fit: cover; /* Ensures the image covers the div without distortion */
+  }
 
 .about-section {
     background-color: #8E46C6;

@@ -111,6 +111,11 @@
     margin-bottom: 5px;
 }
 
+.instructor-name{
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
 .pagination {
     margin-top: 60px;
 }

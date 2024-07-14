@@ -18,10 +18,11 @@ body {
 .headline {
     font-size: 75px;
     font-weight: bold;
+    padding-top: 20px;
 }
 
 .description {
-    margin-bottom: 20px; 
+    margin-bottom: 30px; 
 }
 
 .reserve-form {
@@ -81,6 +82,7 @@ body {
 
 .date-picker-container {
     margin-bottom: 30px; 
+    margin-top: 20px; /* Add margin-top to move down the circles section */
 }
 
 .date-picker-container .form-title {
@@ -94,6 +96,7 @@ body {
 
 .time-picker-container {
     margin-bottom: 30px; 
+    margin-top: 20px; /* Add margin-top to move down the circles section */
 }
 
 .time-picker-container .form-title {
@@ -106,19 +109,37 @@ body {
 }
 
 .expiry-cvv-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px; /* Adjust this value to set the space between the fields */
 }
 
 .expiry-cvv-container .form-group {
-    flex: 1;
-    margin-right: 10px;
-}
-
-.expiry-cvv-container .form-group:last-child {
-    margin-right: 0;
-}
-
-.expiry-cvv-container .form-control {
     width: 100%;
+}
+
+.required-field::after {
+    content: "  *";
+    color: red;
+}
+
+.alert-danger {
+    border-radius: 5px;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    background-color: #f8d7da;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.dropdown-with-arrow {
+    background: white url("data:image/svg+xml;utf8,<svg fill='black' height='38' viewBox='0 0 24 24' width='38' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h24v24H0z' fill='none'/><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 10px center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.form-control[disabled] {
+    background-color: rgb(247, 244, 244);
+    opacity: 1;
 }

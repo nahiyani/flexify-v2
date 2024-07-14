@@ -5,12 +5,31 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Reserve.css';
+import { classNames } from '../data';
 
 const Reserve = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [expiryDate, setExpiryDate] = useState(new Date());
   const [showSuccessModal, setShowSuccessModal] = useState(false); // State for success modal
+  const [selectedClass, setSelectedClass] = useState(null); // State for selected class
+
+  
+  const handleClassChange = (event) => {
+    const selectedClassName = event.target.value;
+    const selectedClassData = classNames.find((cls) => cls.name === selectedClassName);
+    setSelectedClass(selectedClassData);
+
+    // If class format is 'Live', set the date and time pickers
+    if (selectedClassData.format === 'Live') {
+      setStartDate(new Date(selectedClassData.date));
+      setStartTime(new Date(selectedClassData.date + ' ' + selectedClassData.time));
+    } else {
+      // For 'On Demand' classes, clear the date and time pickers
+      setStartDate(null);
+      setStartTime(null);
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,29 +44,6 @@ const Reserve = () => {
 
   const closeModal = () => setShowSuccessModal(false);
 
-  const classNames = [
-    "Class Name 1",
-    "Class Name 2",
-    "Class Name 3",
-    "Class Name 4",
-    "Class Name 5",
-    "Class Name 6",
-    "Class Name 7",
-    "Class Name 8",
-    "Class Name 9",
-    "Class Name 10",
-    "Class Name 11",
-    "Class Name 12",
-    "Class Name 13",
-    "Class Name 14",
-    "Class Name 15",
-    "Class Name 16",
-    "Class Name 17",
-    "Class Name 18",
-    "Class Name 19",
-    "Class Name 20"
-  ];
-
   return (
     <div>
       <Header />
@@ -59,11 +55,11 @@ const Reserve = () => {
         </p>
         <Form className="reserve-form" onSubmit={handleSubmit}>
           <Form.Group controlId="formSubject">
-            <Form.Label className="form-title">Subject</Form.Label>
-            <Form.Control as="select" required className="dropdown-with-arrow">
+            <Form.Label className="form-title required-field">Class</Form.Label>
+            <Form.Control as="select" required className="dropdown-with-arrow" onChange={handleClassChange}>
               <option>Select a class</option>
               {classNames.map((className, index) => (
-                <option key={index}>{className}</option>
+                <option key={index}>{className.name}</option>
               ))}
             </Form.Control>
           </Form.Group>
@@ -75,9 +71,10 @@ const Reserve = () => {
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                   dateFormat="dd-MM-yyyy"
-                  placeholderText="Select a date"
+                  placeholderText="On-demand class"
                   className="form-control purple-datepicker"
                   calendarClassName="purple-datepicker-calendar"
+                  disabled={selectedClass && selectedClass.format === 'On Demand' || selectedClass && selectedClass.format === 'Live'}
                 />
               </Form.Group>
             </Col>
@@ -92,37 +89,38 @@ const Reserve = () => {
                   timeIntervals={15}
                   timeCaption="Time"
                   dateFormat="h:mm aa"
-                  placeholderText="Select a time"
+                  placeholderText="On-demand class"
                   className="form-control purple-datepicker"
                   calendarClassName="purple-datepicker-calendar"
+                  disabled={selectedClass && selectedClass.format === 'On Demand' || selectedClass && selectedClass.format === 'Live'}
                 />
               </Form.Group>
             </Col>
           </Row>
           <Form.Group controlId="formFirstName" className="form-group-spacing">
-            <Form.Label className="form-title">First Name</Form.Label>
+            <Form.Label className="form-title required-field">First Name</Form.Label>
             <Form.Control type="text" placeholder="First Name" required />
           </Form.Group>
           <Form.Group controlId="formLastName" className="form-group-spacing">
-            <Form.Label className="form-title">Last Name</Form.Label>
+            <Form.Label className="form-title required-field">Last Name</Form.Label>
             <Form.Control type="text" placeholder="Last Name" required />
           </Form.Group>
           <Form.Group controlId="formEmail" className="form-group-spacing">
-            <Form.Label className="form-title">Email</Form.Label>
+            <Form.Label className="form-title required-field">Email</Form.Label>
             <Form.Control type="email" placeholder="youremailaddress@gmail.com" required />
           </Form.Group>
           <Form.Group controlId="formPhoneNumber" className="form-group-spacing">
-            <Form.Label className="form-title">Phone Number</Form.Label>
+            <Form.Label className="form-title required-field">Phone Number</Form.Label>
             <Form.Control type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
           </Form.Group>
           <Form.Group controlId="formCreditCardNumber" className="form-group-spacing">
-            <Form.Label className="form-title">Credit Card Number</Form.Label>
+            <Form.Label className="form-title required-field">Credit Card Number</Form.Label>
             <Form.Control type="text" placeholder="1234 5678 9012 3456" required />
           </Form.Group>
           <Row>
             <Col md={6}>
               <Form.Group controlId="formExpiryDate">
-                <Form.Label className="form-title">Expiry Date</Form.Label>
+                <Form.Label className="form-title required-field">Expiry Date</Form.Label>
                 <DatePicker
                   selected={expiryDate}
                   onChange={(date) => setExpiryDate(date)}
@@ -136,7 +134,7 @@ const Reserve = () => {
             </Col>
             <Col md={6}>
               <Form.Group controlId="formCVV">
-                <Form.Label className="form-title">CVV</Form.Label>
+                <Form.Label className="form-title required-field">CVV</Form.Label>
                 <Form.Control 
                   type="text" 
                   placeholder="***" 

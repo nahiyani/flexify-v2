@@ -5,26 +5,7 @@ import { Form, Card, Pagination, InputGroup, FormControl, Dropdown, Button } fro
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Classes.css';
-
-const instructors = [
-  { name: 'All' },
-  { name: 'Ana de Armas', specialty1: 'Pilates', specialty2: 'Yoga' },
-  { name: 'Arnold Schwarzenegger', specialty1: 'Strength Training', specialty2: 'Cardio' },
-  { name: 'Aubrey Graham', specialty1: 'Cardio', specialty2: 'HIIT' },
-  { name: 'Dwayne Johnson', specialty1: 'Strength Training', specialty2: 'HIIT' },
-  { name: 'Emma Watson', specialty1: 'Yoga', specialty2: 'Pilates' },
-  { name: 'Eric Winter', specialty1: 'HIIT', specialty2: 'Strength Training' },
-  { name: 'Hugh Jackman', specialty1: 'Strength Training', specialty2: 'Cardio' },
-  { name: 'Jennifer Lawrence', specialty1: 'Cardio', specialty2: 'HIIT' },
-  { name: 'Jennifer Lopez', specialty1: 'Cardio', specialty2: 'Yoga' },
-  { name: 'Megan Fox', specialty1: 'Cardio', specialty2: 'Strength Training' },
-  { name: 'Scarlett Johansson', specialty1: 'Pilates', specialty2: 'Yoga' },
-  { name: 'Sofia Vergara', specialty1: 'Yoga', specialty2: 'Pilates' },
-  { name: 'Timothee Chalamet', specialty1: 'Yoga', specialty2: 'Pilates' },
-  { name: 'Tom Holland', specialty1: 'Cardio', specialty2: 'Strength Training' },
-  { name: 'Will Smith', specialty1: 'HIIT', specialty2: 'Strength Training' },
-  { name: 'Zara Larsson', specialty1: 'Yoga', specialty2: 'Cardio' }
-];
+import { instructors, classNames } from '../data';
 
 const classTypes = ['Cardio', 'HIIT', 'Pilates', 'Strength Training', 'Yoga'];
 const difficulties = ['Beginner', 'Intermediate', 'Advanced'];
@@ -33,23 +14,8 @@ const equipment = ['No Equipment', 'Dumbbells', 'Resistance Bands', 'Step Platfo
 const formats = ['Live', 'On Demand'];
 const ratings = ['1 star', '2 stars', '3 stars', '4 stars', '5 stars'];
 
-const generateRandomClasses = () => {
-  const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
-  return Array.from({ length: 20 }, (_, i) => ({
-    name: `Class Name ${i + 1}`,
-    instructor: getRandomElement(instructors),
-    classType: getRandomElement(classTypes),
-    difficulty: getRandomElement(difficulties),
-    duration: getRandomElement(durations),
-    equipment: getRandomElement(equipment),
-    format: getRandomElement(formats),
-    rating: getRandomElement(ratings),
-    description: "Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
-  }));
-};
-
 const Classes = () => {
-  const [allClasses, setAllClasses] = useState(generateRandomClasses());
+  const [allClasses, setAllClasses] = useState(classNames);
   const [filteredClasses, setFilteredClasses] = useState(allClasses);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedInstructor, setSelectedInstructor] = useState('All');
@@ -60,6 +26,9 @@ const Classes = () => {
   const [selectedFormats, setSelectedFormats] = useState([]);
   const [selectedRatings, setSelectedRatings] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [favorites, setFavorites] = useState([]);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+
   const classesPerPage = 4;
 
   const handleDropdownSelect = (key, value) => {
@@ -77,7 +46,7 @@ const Classes = () => {
   };
 
   const filterClasses = () => {
-    return allClasses.filter(cls =>
+    let filtered = allClasses.filter(cls =>
       cls.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (selectedInstructor === 'All' || cls.instructor.name === selectedInstructor) &&
       (selectedClassTypes.length === 0 || selectedClassTypes.includes(cls.classType)) &&
@@ -87,18 +56,62 @@ const Classes = () => {
       (selectedFormats.length === 0 || selectedFormats.includes(cls.format)) &&
       (selectedRatings.length === 0 || selectedRatings.includes(cls.rating))
     );
+  
+    if (showFavoritesOnly) {
+      filtered = filtered.filter(cls => favorites.includes(cls.name));
+    } else {
+      // Apply additional filters based on active selections
+      if (selectedInstructor !== 'All') {
+        filtered = filtered.filter(cls => cls.instructor.name === selectedInstructor);
+      }
+      if (selectedClassTypes.length > 0) {
+        filtered = filtered.filter(cls => selectedClassTypes.includes(cls.classType));
+      }
+      if (selectedDifficulties.length > 0) {
+        filtered = filtered.filter(cls => selectedDifficulties.includes(cls.difficulty));
+      }
+      if (selectedDurations.length > 0) {
+        filtered = filtered.filter(cls => selectedDurations.includes(cls.duration));
+      }
+      if (selectedEquipment.length > 0) {
+        filtered = filtered.filter(cls => selectedEquipment.includes(cls.equipment));
+      }
+      if (selectedFormats.length > 0) {
+        filtered = filtered.filter(cls => selectedFormats.includes(cls.format));
+      }
+      if (selectedRatings.length > 0) {
+        filtered = filtered.filter(cls => selectedRatings.includes(cls.rating));
+      }
+    }
+  
+    return filtered;
   };
-
-  const handleFilterButtonClick = () => {
-    const filtered = filterClasses();
-    setFilteredClasses(filtered);
-    setCurrentPage(1); 
+  
+  const toggleFavoritesOnly = () => {
+    setShowFavoritesOnly(!showFavoritesOnly);
+    if (!showFavoritesOnly) {
+      setSelectedInstructor('All');
+      setSelectedClassTypes([]);
+      setSelectedDifficulties([]);
+      setSelectedDurations([]);
+      setSelectedEquipment([]);
+      setSelectedFormats([]);
+      setSelectedRatings([]);
+    }
   };
-
+  
+  const toggleFavorite = (className) => {
+    if (favorites.includes(className)) {
+      setFavorites(favorites.filter(fav => fav !== className));
+    } else {
+      setFavorites([...favorites, className]);
+    }
+  };
+  
   useEffect(() => {
     setFilteredClasses(filterClasses());
-    setCurrentPage(1); 
-  }, [searchTerm, selectedInstructor, selectedClassTypes, selectedDifficulties, selectedDurations, selectedEquipment, selectedFormats, selectedRatings, allClasses]);
+    setCurrentPage(1);
+  }, [searchTerm, selectedInstructor, selectedClassTypes, selectedDifficulties, selectedDurations, selectedEquipment, selectedFormats, selectedRatings, allClasses, showFavoritesOnly, favorites]);  
 
   const indexOfLastClass = currentPage * classesPerPage;
   const indexOfFirstClass = indexOfLastClass - classesPerPage;
@@ -132,138 +145,153 @@ const Classes = () => {
         </InputGroup>
       </div>
       <div className="search-container">
-        <div className="facets">
-          <div className="facet">
-            <div className="facet-header">Instructor</div>
-            <Dropdown onSelect={(e) => handleDropdownSelect('instructor', e)}>
-              <Dropdown.Toggle variant="secondary" className="instructor-selector">
-                {selectedInstructor || 'Select Instructor'}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {instructors.map((instructor) => (
-                  <Dropdown.Item key={instructor.name} eventKey={instructor.name}>
-                    {instructor.name}
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
+      <div className="facets">
+  <div className="facet">
+    <div className="facet-header">Class Type</div>
+    {classTypes.map((type) => (
+      <Form.Check
+        key={type}
+        type="checkbox"
+        label={type}
+        checked={selectedClassTypes.includes(type)}
+        onChange={() => handleCheckboxChange(setSelectedClassTypes, selectedClassTypes, type)}
+        className="purple-checkbox"
+      />
+    ))}
+  </div>
 
-          <div className="facet">
-            <div className="facet-header">Class Type</div>
-            {classTypes.map((type) => (
-              <Form.Check
-                key={type}
-                type="checkbox"
-                label={type}
-                checked={selectedClassTypes.includes(type)}
-                onChange={() => handleCheckboxChange(setSelectedClassTypes, selectedClassTypes, type)}
-                className="purple-checkbox"
-              />
-            ))}
-          </div>
+  <div className="facet">
+    <div className="facet-header">Difficulty</div>
+    {difficulties.map((difficulty) => (
+      <Form.Check
+        key={difficulty}
+        type="checkbox"
+        label={difficulty}
+        checked={selectedDifficulties.includes(difficulty)}
+        onChange={() => handleCheckboxChange(setSelectedDifficulties, selectedDifficulties, difficulty)}
+        className="purple-checkbox"
+      />
+    ))}
+  </div>
 
-          <div className="facet">
-            <div className="facet-header">Difficulty</div>
-            {difficulties.map((difficulty) => (
-              <Form.Check
-                key={difficulty}
-                type="checkbox"
-                label={difficulty}
-                checked={selectedDifficulties.includes(difficulty)}
-                onChange={() => handleCheckboxChange(setSelectedDifficulties, selectedDifficulties, difficulty)}
-                className="purple-checkbox"
-              />
-            ))}
-          </div>
+  <div className="facet">
+    <div className="facet-header">Duration</div>
+    {durations.map((duration) => (
+      <Form.Check
+        key={duration}
+        type="checkbox"
+        label={duration}
+        checked={selectedDurations.includes(duration)}
+        onChange={() => handleCheckboxChange(setSelectedDurations, selectedDurations, duration)}
+        className="purple-checkbox"
+      />
+    ))}
+  </div>
 
-          <div className="facet">
-            <div className="facet-header">Duration</div>
-            {durations.map((duration) => (
-              <Form.Check
-                key={duration}
-                type="checkbox"
-                label={duration}
-                checked={selectedDurations.includes(duration)}
-                onChange={() => handleCheckboxChange(setSelectedDurations, selectedDurations, duration)}
-                className="purple-checkbox"
-              />
-            ))}
-          </div>
+  <div className="facet">
+    <div className="facet-header">Equipment</div>
+    {equipment.map((equip) => (
+      <Form.Check
+        key={equip}
+        type="checkbox"
+        label={equip}
+        checked={selectedEquipment.includes(equip)}
+        onChange={() => handleCheckboxChange(setSelectedEquipment, selectedEquipment, equip)}
+        className="purple-checkbox"
+      />
+    ))}
+  </div>
 
-          <div className="facet">
-            <div className="facet-header">Equipment</div>
-            {equipment.map((equip) => (
-              <Form.Check
-                key={equip}
-                type="checkbox"
-                label={equip}
-                checked={selectedEquipment.includes(equip)}
-                onChange={() => handleCheckboxChange(setSelectedEquipment, selectedEquipment, equip)}
-                className="purple-checkbox"
-              />
-            ))}
-          </div>
+  <div className="facet">
+  <div className="facet-header">Favorite</div>
+  <Form.Check
+    type="switch"
+    id="favorites-switch"
+    label="Show Favorites"
+    checked={showFavoritesOnly}
+    onChange={toggleFavoritesOnly}
+    className="purple-checkbox"
+  />
+</div>
 
-          <div className="facet">
-            <div className="facet-header">Format</div>
-            {formats.map((format) => (
-              <Form.Check
-                key={format}
-                type="checkbox"
-                label={format}
-                checked={selectedFormats.includes(format)}
-                onChange={() => handleCheckboxChange(setSelectedFormats, selectedFormats, format)}
-                className="purple-checkbox"
-              />
-            ))}
-          </div>
+  <div className="facet">
+    <div className="facet-header">Format</div>
+    {formats.map((format) => (
+      <Form.Check
+        key={format}
+        type="checkbox"
+        label={format}
+        checked={selectedFormats.includes(format)}
+        onChange={() => handleCheckboxChange(setSelectedFormats, selectedFormats, format)}
+        className="purple-checkbox"
+      />
+    ))}
+  </div>
 
-          <div className="facet">
-            <div className="facet-header">Rating</div>
-            {ratings.map((rating) => (
-              <Form.Check
-                key={rating}
-                type="checkbox"
-                label={rating}
-                checked={selectedRatings.includes(rating)}
-                onChange={() => handleCheckboxChange(setSelectedRatings, selectedRatings, rating)}
-                className="purple-checkbox"
-              />
-            ))}
-          </div>
+  <div className="facet">
+    <div className="facet-header">Instructor</div>
+    <Dropdown onSelect={(e) => handleDropdownSelect('instructor', e)}>
+      <Dropdown.Toggle variant="secondary" className="instructor-selector">
+        {selectedInstructor || 'Select Instructor'}
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        {instructors.map((instructor) => (
+          <Dropdown.Item key={instructor.name} eventKey={instructor.name}>
+            {instructor.name}
+          </Dropdown.Item>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
+  </div>
 
-          <div className="facet">
-            <Button
-              variant="secondary"
-              className="purple-button"
-              onClick={handleFilterButtonClick}
-            >
-              Filter
-            </Button>
-          </div>
-        </div>
+  <div className="facet">
+    <div className="facet-header">Rating</div>
+    {ratings.map((rating) => (
+      <Form.Check
+        key={rating}
+        type="checkbox"
+        label={rating}
+        checked={selectedRatings.includes(rating)}
+        onChange={() => handleCheckboxChange(setSelectedRatings, selectedRatings, rating)}
+        className="purple-checkbox"
+      />
+    ))}
+  </div>
+</div>
         <div className="results">
           {currentClasses.map((cls, index) => (
             <Card className="class-card" key={index}>
               <Card.Body>
-                <Card.Title>{cls.name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">Instructor: {cls.instructor.name}</Card.Subtitle>
-                <Card.Text>
-                  <strong>Class Type:</strong> {cls.classType}<br />
-                  <strong>Difficulty:</strong> {cls.difficulty}<br />
-                  <strong>Duration:</strong> {cls.duration}<br />
-                  <strong>Equipment:</strong> {cls.equipment}<br />
-                  <strong>Format:</strong> {cls.format}<br />
-                  <strong>Rating:</strong> {cls.rating}<br />
-                </Card.Text>
-                <Card.Text>{cls.description}</Card.Text>
-                <Button className="purple-button" onClick={handleReserveClick}>
-                  <Link to="/reserve" className="nav-link-custom">
-                    RESERVE
-                  </Link>
-                </Button>
-              </Card.Body>
+  <Card.Title>{cls.name}</Card.Title>
+  <Card.Subtitle className="mb-2 text-muted">Instructor: {cls.instructor.name}</Card.Subtitle>
+  <Card.Text>
+    <strong>Class Type:</strong> {cls.classType}<br />
+    <strong>Difficulty:</strong> {cls.difficulty}<br />
+    <strong>Duration:</strong> {cls.duration}<br />
+    <strong>Equipment:</strong> {cls.equipment}<br />
+    <strong>Format:</strong> {cls.format}<br />
+    {cls.format === 'Live' && (
+      <>
+        <strong>Date:</strong> {cls.date}<br />
+        <strong>Time:</strong> {cls.time}<br />
+      </>
+    )}
+    <strong>Rating:</strong> {cls.rating}<br />
+  </Card.Text>
+  <Card.Text>{cls.description}</Card.Text>
+  <Button className="purple-button" onClick={handleReserveClick}>
+    <Link to="/reserve" className="nav-link-custom">
+      RESERVE
+    </Link>
+  </Button>
+  <span
+    className={`favorite-star ${favorites.includes(cls.name) ? 'favorited' : ''}`}
+    onClick={() => toggleFavorite(cls.name)}
+  >
+    &#9733; {/* Render a star character here */}
+  </span>
+</Card.Body>
+
             </Card>
           ))}
         </div> 

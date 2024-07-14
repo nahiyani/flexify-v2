@@ -108,10 +108,33 @@
 }
 
 .class-card {
+    position: relative; 
     margin-bottom: 20px;
     border: 2px solid #8E46C6;
     border-radius: 15px;
+    overflow: hidden; 
+    transition: transform 0.2s ease-in-out; 
+
+    &:hover {
+        transform: scale(1.01); 
+    }
+
+    .favorite-star {
+        position: absolute;
+        top: 10px; 
+        right: 10px; 
+        cursor: pointer;
+        font-size: 2rem; 
+        color: #ccc; 
+        transition: transform 0.2s ease-in-out; 
+
+        &:hover {
+            transform: scale(1.01); 
+            color: #f4d03f; 
+        }
+    }
 }
+
 
 .class-card .class-card-content {
     display: flex;
@@ -121,6 +144,17 @@
 .class-card .class-details {
     flex: 1;
 }
+
+.favorite-star {
+    cursor: pointer;
+    font-size: 1.5rem; /* Adjust size as needed */
+    color: #ccc; /* Default star color */
+  }
+  
+  .favorite-star.favorited {
+    color: #f4d03f; /* Yellow color for favorited star */
+  }
+ 
 
 .reserve-button {
     background-color: #8E46C6 !important;

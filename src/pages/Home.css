@@ -7,22 +7,53 @@
 }
 
 .hero-section {
+  position: relative;
   background-image: url('../images/hompage-image.webp');
   background-size: cover;
+  background-position: center;
   height: 500px;
-  color: white;
-  padding: 60px 0;
-  background-size: cover;
+  padding: 100px 20px; /* Adjust padding as needed */
+  color: white; /* Ensure text is readable */
 }
 
 .hero-section h1 {
   font-size: 2.5em;
   margin-bottom: 30px;
+  font-weight: bold;
 }
 
 .hero-section p {
   font-size: 1.2em;
   margin: 10px 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent overlay for better text readability */
+  z-index: 1;
+}
+
+.text-stuff{
+  width: 75%;
+  display: inline;
+  justify-content: center; /* Centers horizontally */
+  align-items: center;    /* Centers vertically */
+}
+
+.main-header {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-top: 50px;
 }
 
 .featured-classes {
@@ -43,12 +74,16 @@
   position: relative;
 }
 
-.featured-classes .card .placeholder-image {
+.featured-classes .card .placeholder-image img {
   width: 90%;
-  height: 200px; /* Adjust height as needed */
-  background-color: #ccc;
-  margin: 20px auto 0;
+  height: 200px;
+  margin: 0 auto 10px; 
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
 }
 
 .instructors-section {
@@ -74,7 +109,7 @@
   height: 200px; 
   background-color: #ccc;
   margin: 20px auto 0;
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
 .testimony-section {

@@ -6,34 +6,46 @@ import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom'; 
 import './Home.css';
 
+import arnold from '../images/arnold.png';
+import dwayneJohnson from '../images/dwaynejohnson.webp';
+import ericWinter from '../images/ericwinter.webp';
+import scarlettJohansson from '../images/scarlettjohansson.webp';
+
 const Home = () => {
   return (
     <div>
       <Header />
       <div className="fitness-studio">
-        <section className="hero-section text-center">
-          <h1 style={{ fontSize: '2.5em', fontWeight: 'bold', marginTop: '50px' }} className='main-header'>
-            YOUR PERSONAL VIRTUAL FITNESS STUDIO - ALL IN ONE PLACE!
-          </h1>
-          <p>
-            Welcome to Flexify, where fitness meets convenience! Whether you're a seasoned athlete or just
-            starting your fitness journey, our virtual studio offers a diverse range of classes to fit your
-            schedule and your goals. From energizing yoga sessions to high-intensity interval training (HIIT)
-            and everything in between, our expert instructors are here to guide you every step of the way.
-          </p>
-          <p>
-            Join our community and transform your living room into a personal gym with live classes, on-demand
-            workouts, and a wealth of resources to keep you motivated and informed.
-          </p>
-          <Link to="/library" className="nav-link-custom">
-            <Button className='purple-button'>
-              EXPLORE OUR COLLECTION
-            </Button>
-          </Link>
-        </section>
+      <section className="hero-section text-center">
+  <div className="hero-content">
+    <div className='text-stuff'>
+    <h1 className='main-header'>
+      YOUR PERSONAL VIRTUAL FITNESS STUDIO - ALL IN ONE PLACE!
+    </h1>
+    <p>
+      Welcome to Flexify, where fitness meets convenience! Whether you're a seasoned athlete or just
+      starting your fitness journey, our virtual studio offers a diverse range of classes to fit your
+      schedule and your goals. From energizing yoga sessions to high-intensity interval training (HIIT)
+      and everything in between, our expert instructors are here to guide you every step of the way.
+    </p>
+    <p>
+      Join our community and transform your living room into a personal gym with live classes, on-demand
+      workouts, and a wealth of resources to keep you motivated and informed.
+    </p>
+    <Link to="/library" className="nav-link-custom">
+      <Button className='purple-button'>
+        EXPLORE OUR COLLECTION
+      </Button>
+    </Link>
+
+
+    </div>
+    
+  </div>
+</section>
 
         <section className="featured-classes text-center">
-          <h2 style={{ fontSize: '75px', fontWeight: 'bold', textTransform: 'uppercase', marginTop: '50px' }}>FEATURED CLASSES</h2>
+          <h2 style={{ fontSize: '75px', fontWeight: 'bold', textTransform: 'uppercase', marginTop: '40px' }}>FEATURED CLASSES</h2>
           <Container>
             <Row>
               <Col md={4}>
@@ -84,48 +96,48 @@ const Home = () => {
             <Row>
               <Col md={3}>
                 <Card>
-                  <div className="placeholder-image"></div>
+                <img src={arnold} alt="Arnold Schwarzenegger" />
                   <Card.Body>
-                    <Card.Title style={{ fontWeight: 'bold', color: '#8E46C6' }}>Name</Card.Title>
+                    <Card.Title style={{ fontWeight: 'bold', color: '#8E46C6' }}>Arnold Schwarzenegger</Card.Title>
                     <Card.Text>
-                      <span className="specialty">Specialty #1</span><br />
-                      <span className="specialty">Specialty #2</span>
+                      <span className="specialty">Strength Training</span><br />
+                      <span className="specialty">Cardio</span>
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={3}>
                 <Card>
-                  <div className="placeholder-image"></div>
+                <img src={dwayneJohnson} alt="Dwayne Johnson" />
                   <Card.Body>
-                    <Card.Title style={{ fontWeight: 'bold', color: '#8E46C6' }}>Name</Card.Title>
+                    <Card.Title style={{ fontWeight: 'bold', color: '#8E46C6' }}>Dwayne Johnson</Card.Title>
                     <Card.Text>
-                      <span className="specialty">Specialty #1</span><br />
-                      <span className="specialty">Specialty #2</span>
+                      <span className="specialty">Strength Training</span><br />
+                      <span className="specialty">HIIT</span>
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={3}>
                 <Card>
-                  <div className="placeholder-image"></div>
+                <img src={ericWinter} alt="Eric Winter" />
                   <Card.Body>
-                    <Card.Title style={{ fontWeight: 'bold', color: '#8E46C6' }}>Name</Card.Title>
+                    <Card.Title style={{ fontWeight: 'bold', color: '#8E46C6' }}>Eric Winter</Card.Title>
                     <Card.Text>
-                      <span className="specialty">Specialty #1</span><br />
-                      <span className="specialty">Specialty #2</span>
+                    <span className="specialty">HIIT</span><br />
+                    <span className="specialty">Strength Training</span>
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={3}>
                 <Card>
-                  <div className="placeholder-image"></div>
+                <img src={scarlettJohansson} alt="Scarlett Johansson" />
                   <Card.Body>
-                    <Card.Title style={{ fontWeight: 'bold', color: '#8E46C6' }}>Name</Card.Title>
+                    <Card.Title style={{ fontWeight: 'bold', color: '#8E46C6' }}>Scarlett Johansson</Card.Title>
                     <Card.Text>
-                      <span className="specialty">Specialty #1</span><br />
-                      <span className="specialty">Specialty #2</span>
+                      <span className="specialty">Pilates</span><br />
+                      <span className="specialty">Yoga</span>
                     </Card.Text>
                   </Card.Body>
                 </Card>

@@ -69,8 +69,8 @@ const Footer = () => {
                   <li><Nav.Link as={Link} to="/library" className="nav-link-custom">Library</Nav.Link></li>
                   <li><Nav.Link as={Link} to="/reserve" className="nav-link-custom">Reserve</Nav.Link></li>
                   <li><Nav.Link as={Link} to="/" className="nav-link-custom">Careers</Nav.Link></li>
+                  <li><Nav.Link as={Link} to="/" className="nav-link-custom">FAQ</Nav.Link></li>
                   <li><Nav.Link as={Link} to="/" className="nav-link-custom">Privacy Policy</Nav.Link></li>
-                  <li><Nav.Link as={Link} to="/" className="nav-link-custom">Terms of Service</Nav.Link></li>
                 </ul>
               </Col>
             </Row>
