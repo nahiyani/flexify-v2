@@ -6,38 +6,43 @@ body {
 
 .logo-image {
     width: 40%;
-    height: 7%;
-  }
+    height: 0%; /* Ensures the logo maintains its aspect ratio */
+    display: block; /* Ensures the logo is treated as a block element */
+    margin: 0 auto; /* Centers the logo horizontally */
+}
 
 .main-nav {
     background-color: #8E46C6;
-    padding: 20px 0; 
+    padding: 20px 0;
+    display: flex;
+    align-items: center; /* Vertically centers the items in the nav */
+    justify-content: space-between; /* Distributes space between the logo and nav items */
 }
 
 .brand, .nav-link-custom {
     color: white !important;
-    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out; 
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .brand {
     position: relative;
     padding-left: 20px;
-    font-weight: 800; 
-    color: white; 
+    font-weight: 800;
+    color: white;
 }
 
 .nav-list {
     display: flex;
-    gap: 20px; 
+    gap: 20px;
 }
 
 .nav-list .nav-item .nav-link-custom {
-    padding: 10px 15px; 
-    transition: color 0.5s ease-in-out, background-color 0.3s ease-in-out; 
-    font-weight: 700; 
-    border-radius: 5px; 
-    position: relative; 
-    text-align: center; 
+    padding: 10px 15px;
+    transition: color 0.5s ease-in-out, background-color 0.3s ease-in-out;
+    font-weight: 700;
+    border-radius: 5px;
+    position: relative;
+    text-align: center;
 }
 
 .nav-list .nav-item .nav-link-custom::after {
@@ -47,14 +52,14 @@ body {
     height: 2px;
     background: white;
     position: absolute;
-    bottom: -5px; 
+    bottom: -5px;
     left: 50%;
     transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 
 .nav-list .nav-item .nav-link-custom:hover {
-    color: #8E46C6 !important; 
-    background-color: white; 
+    color: #8E46C6 !important;
+    background-color: white;
     text-decoration: none;
 }
 
@@ -64,7 +69,7 @@ body {
 }
 
 .nav-list .nav-item:hover .nav-link-custom {
-    background-color: white; 
-    color: #8E46C6 !important; 
+    background-color: white;
+    color: #8E46C6 !important;
     text-decoration: none;
 }

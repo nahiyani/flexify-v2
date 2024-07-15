@@ -8,162 +8,300 @@ import './Reserve.css';
 import { classNames } from '../data';
 
 const Reserve = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [startTime, setStartTime] = useState(new Date());
-  const [expiryDate, setExpiryDate] = useState(new Date());
-  const [showSuccessModal, setShowSuccessModal] = useState(false); // State for success modal
-  const [selectedClass, setSelectedClass] = useState(null); // State for selected class
+    const [startDate, setStartDate] = useState(new Date());
+    const [startTime, setStartTime] = useState(new Date());
+    const [expiryDate, setExpiryDate] = useState(new Date());
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [selectedClass, setSelectedClass] = useState(null);
+    const [cardNumber, setCardNumber] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [cvv, setCvv] = useState('');
+    const [errors, setErrors] = useState({});
 
-  
-  const handleClassChange = (event) => {
-    const selectedClassName = event.target.value;
-    const selectedClassData = classNames.find((cls) => cls.name === selectedClassName);
-    setSelectedClass(selectedClassData);
+    const handleClassChange = (event) => {
+        const selectedClassName = event.target.value;
+        const selectedClassData = classNames.find((cls) => cls.name === selectedClassName);
+        setSelectedClass(selectedClassData);
 
-    // If class format is 'Live', set the date and time pickers
-    if (selectedClassData.format === 'Live') {
-      setStartDate(new Date(selectedClassData.date));
-      setStartTime(new Date(selectedClassData.date + ' ' + selectedClassData.time));
-    } else {
-      // For 'On Demand' classes, clear the date and time pickers
-      setStartDate(null);
-      setStartTime(null);
-    }
-  };
+        if (!selectedClassData) {
+            setStartDate(new Date());
+            setStartTime(new Date());
+            setErrors((prev) => ({ ...prev, class: 'Please select a class' }));
+        } else {
+            setErrors((prev) => {
+                const newErrors = { ...prev };
+                delete newErrors.class;
+                return newErrors;
+            });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
-    } else {
-      // Handle successful form submission
-      setShowSuccessModal(true);
-    }
-  };
+            if (selectedClassData.format === 'Live') {
+                setStartDate(new Date(selectedClassData.date));
+                setStartTime(new Date(`${selectedClassData.date} ${selectedClassData.time}`));
+            } else {
+                setStartDate(null);
+                setStartTime(null);
+            }
+        }
+    };
 
-  const closeModal = () => setShowSuccessModal(false);
+    const validateField = (fieldName, value) => {
+        const newErrors = { ...errors };
+        switch (fieldName) {
+            case 'email':
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                    newErrors.email = 'Please enter a valid email address';
+                } else {
+                    delete newErrors.email;
+                }
+                break;
+            case 'phoneNumber':
+                if (!/^\d{3}-\d{3}-\d{4}$/.test(value)) {
+                    newErrors.phoneNumber = 'Please enter a valid phone number (XXX-XXX-XXXX)';
+                } else {
+                    delete newErrors.phoneNumber;
+                }
+                break;
+            case 'cardNumber':
+                if (!/^\d{4} \d{4} \d{4} \d{4}$/.test(value)) {
+                    newErrors.cardNumber = 'Please enter a valid credit card number (XXXX XXXX XXXX XXXX)';
+                } else {
+                    delete newErrors.cardNumber;
+                }
+                break;
+            case 'cvv':
+                if (!/^\d{3}$/.test(value)) {
+                    newErrors.cvv = 'Please enter a valid 3-digit CVV number';
+                } else {
+                    delete newErrors.cvv;
+                }
+                break;
+            case 'firstName':
+                if (!/^[a-zA-Z\s]+$/.test(value)) {
+                    newErrors.firstName = 'First name must contain only letters';
+                } else {
+                    delete newErrors.firstName;
+                }
+                break;
+            case 'lastName':
+                if (!/^[a-zA-Z\s]+$/.test(value)) {
+                    newErrors.lastName = 'Last name must contain only letters';
+                } else {
+                    delete newErrors.lastName;
+                }
+                break;
+            case 'expiryDate':
+                const expiry = new Date(value);
+                const now = new Date();
+                if (expiry < now) {
+                    newErrors.expiryDate = 'Credit card expiry date cannot be in the past.';
+                } else {
+                    delete newErrors.expiryDate;
+                }
+                break;
+            default:
+                break;
+        }
+        setErrors(newErrors);
+    };
 
-  return (
-    <div>
-      <Header />
-      <Container className="reserve-container">
-        <h1 className="text-center headline">RESERVE A CLASS</h1>
-        <p className="text-center description">
-          Flexify strives to make the process of scheduling your fitness sessions as seamless and convenient as possible.
-          Follow the simple steps below to reserve a spot in one of our many classes with a certified expert trainer and take the first step towards achieving your fitness goals.
-        </p>
-        <Form className="reserve-form" onSubmit={handleSubmit}>
-          <Form.Group controlId="formSubject">
-            <Form.Label className="form-title required-field">Class</Form.Label>
-            <Form.Control as="select" required className="dropdown-with-arrow" onChange={handleClassChange}>
-              <option>Select a class</option>
-              {classNames.map((className, index) => (
-                <option key={index}>{className.name}</option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          <Row>
-            <Col md={6}>
-              <Form.Group controlId="formDate" className="date-picker-container">
-                <Form.Label className="form-title">Date</Form.Label>
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  dateFormat="dd-MM-yyyy"
-                  placeholderText="On-demand class"
-                  className="form-control purple-datepicker"
-                  calendarClassName="purple-datepicker-calendar"
-                  disabled={selectedClass && selectedClass.format === 'On Demand' || selectedClass && selectedClass.format === 'Live'}
-                />
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group controlId="formTime" className="time-picker-container">
-                <Form.Label className="form-title">Time</Form.Label>
-                <DatePicker
-                  selected={startTime}
-                  onChange={(time) => setStartTime(time)}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  timeIntervals={15}
-                  timeCaption="Time"
-                  dateFormat="h:mm aa"
-                  placeholderText="On-demand class"
-                  className="form-control purple-datepicker"
-                  calendarClassName="purple-datepicker-calendar"
-                  disabled={selectedClass && selectedClass.format === 'On Demand' || selectedClass && selectedClass.format === 'Live'}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Form.Group controlId="formFirstName" className="form-group-spacing">
-            <Form.Label className="form-title required-field">First Name</Form.Label>
-            <Form.Control type="text" placeholder="First Name" required />
-          </Form.Group>
-          <Form.Group controlId="formLastName" className="form-group-spacing">
-            <Form.Label className="form-title required-field">Last Name</Form.Label>
-            <Form.Control type="text" placeholder="Last Name" required />
-          </Form.Group>
-          <Form.Group controlId="formEmail" className="form-group-spacing">
-            <Form.Label className="form-title required-field">Email</Form.Label>
-            <Form.Control type="email" placeholder="youremailaddress@gmail.com" required />
-          </Form.Group>
-          <Form.Group controlId="formPhoneNumber" className="form-group-spacing">
-            <Form.Label className="form-title required-field">Phone Number</Form.Label>
-            <Form.Control type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
-          </Form.Group>
-          <Form.Group controlId="formCreditCardNumber" className="form-group-spacing">
-            <Form.Label className="form-title required-field">Credit Card Number</Form.Label>
-            <Form.Control type="text" placeholder="1234 5678 9012 3456" required />
-          </Form.Group>
-          <Row>
-            <Col md={6}>
-              <Form.Group controlId="formExpiryDate">
-                <Form.Label className="form-title required-field">Expiry Date</Form.Label>
-                <DatePicker
-                  selected={expiryDate}
-                  onChange={(date) => setExpiryDate(date)}
-                  dateFormat="MM/yy"
-                  showMonthYearPicker
-                  placeholderText="MM/YY"
-                  className="form-control purple-datepicker"
-                  calendarClassName="purple-datepicker-calendar"
-                />
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group controlId="formCVV">
-                <Form.Label className="form-title required-field">CVV</Form.Label>
-                <Form.Control 
-                  type="text" 
-                  placeholder="***" 
-                  required 
-                  pattern="\d{3}" 
-                  title="Please enter a 3-digit CVV number"
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-          <div className="button-container">
-            <Button variant="success" type="submit" className="confirm-button">Confirm Reservation</Button>
-          </div>
-        </Form>
-      </Container>
-      <Modal show={showSuccessModal} onHide={closeModal} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Reservation Successful!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Thank you for your reservation! A confirmation has been sent to your email address.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="success" onClick={closeModal}>Close</Button>
-        </Modal.Footer>
-      </Modal>
-      <Footer />
-    </div>
-  );
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const newErrors = {};
+
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+        } else {
+            if (!selectedClass) {
+                newErrors.class = 'Please select a class';
+            }
+
+            const expiry = new Date(expiryDate);
+            const now = new Date();
+            if (expiry < now) {
+                newErrors.expiryDate = 'Credit card expiry date cannot be in the past.';
+            }
+
+            const requiredFields = ['formFirstName', 'formLastName', 'formEmail', 'formPhoneNumber', 'formCreditCardNumber', 'formCVV'];
+            requiredFields.forEach(field => {
+                if (!form[field].value) {
+                    newErrors[field] = 'This field is required';
+                }
+            });
+
+            if (Object.keys(newErrors).length === 0) {
+                setShowSuccessModal(true);
+            } else {
+                setErrors(newErrors);
+            }
+        }
+    };
+
+    const handlePhoneNumberChange = (event) => {
+        let { value } = event.target;
+        value = value.replace(/\D/g, '').substring(0, 10);
+        const formattedInput = value.replace(/(\d{3})(\d{1,3})?(\d{1,4})?/, (match, g1, g2, g3) =>
+            g2 ? (g3 ? `${g1}-${g2}-${g3}` : `${g1}-${g2}`) : g1
+        );
+        setPhoneNumber(formattedInput);
+        validateField('phoneNumber', formattedInput);
+    };
+
+    const handleCardNumberChange = (event) => {
+        let { value } = event.target;
+        value = value.replace(/\D/g, '').substring(0, 16);
+        const formattedInput = value.replace(/(.{4})/g, '$1 ').trim();
+        setCardNumber(formattedInput);
+        validateField('cardNumber', formattedInput);
+    };
+
+    const handleCvvChange = (event) => {
+        let { value } = event.target;
+        value = value.replace(/\D/g, '').substring(0, 3);
+        setCvv(value);
+        validateField('cvv', value);
+    };
+
+    const handleInputChange = (event, field) => {
+        validateField(field, event.target.value);
+    };
+
+    const handleExpiryDateChange = (date) => {
+        setExpiryDate(date);
+        validateField('expiryDate', date);
+    };
+
+    const closeModal = () => {
+        setShowSuccessModal(false);
+        setErrors({});  // Clear errors when modal is closed
+    };
+
+    return (
+        <div>
+            <Header />
+            <Container className="reserve-container">
+                <h1 className="text-center headline">RESERVE A CLASS</h1>
+                <p className="text-center description">
+                    Flexify strives to make the process of scheduling your fitness sessions as seamless and convenient as possible.
+                    Follow the simple steps below to reserve a spot in one of our many classes with a certified expert trainer and take the 
+                    first step towards achieving your fitness goals.
+                </p>
+                <Form className="reserve-form" onSubmit={handleSubmit} noValidate>
+                    <Form.Group controlId="formSubject">
+                        <Form.Label className="form-title required-field">Class</Form.Label>
+                        <Form.Control as="select" required className="dropdown-with-arrow" onChange={handleClassChange} isInvalid={!!errors.class}>
+                            <option>Select a class</option>
+                            {classNames.map((className, index) => (
+                                <option key={index}>{className.name}</option>
+                            ))}
+                        </Form.Control>
+                        <Form.Control.Feedback type="invalid">{errors.class}</Form.Control.Feedback>
+                    </Form.Group>
+                    <Row>
+                        <Col md={6}>
+                            <Form.Group controlId="formDate" className="date-picker-container">
+                                <Form.Label className="form-title">Date</Form.Label>
+                                <DatePicker
+                                    selected={startDate}
+                                    onChange={(date) => setStartDate(date)}
+                                    dateFormat="dd-MM-yyyy"
+                                    placeholderText="Select date"
+                                    className={`form-control purple-datepicker`}
+                                    calendarClassName="purple-datepicker-calendar"
+                                    disabled={selectedClass && (selectedClass.format === 'On Demand' || selectedClass.format === 'Live')}
+                                />
+                                <div className="text-danger">{errors.startDate}</div>
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group controlId="formTime" className="time-picker-container">
+                                <Form.Label className="form-title">Time</Form.Label>
+                                <DatePicker
+                                    selected={startTime}
+                                    onChange={(time) => setStartTime(time)}
+                                    showTimeSelect
+                                    showTimeSelectOnly
+                                    timeIntervals={15}
+                                    timeCaption="Time"
+                                    dateFormat="h:mm aa"
+                                    placeholderText="Select time"
+                                    className="form-control purple-datepicker"
+                                    calendarClassName="purple-datepicker-calendar"
+                                    disabled={selectedClass && (selectedClass.format === 'On Demand' || selectedClass.format === 'Live')}
+                                />
+                                {errors.startTime && <div className="text-danger">{errors.startTime}</div>}
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Form.Group controlId="formFirstName" className="form-group-spacing">
+                        <Form.Label className="form-title required-field">First Name</Form.Label>
+                        <Form.Control type="text" placeholder="First Name" required onChange={(e) => handleInputChange(e, 'firstName')} isInvalid={!!errors.firstName} />
+                        <Form.Control.Feedback type="invalid">{errors.firstName}</Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group controlId="formLastName" className="form-group-spacing">
+                        <Form.Label className="form-title required-field">Last Name</Form.Label>
+                        <Form.Control type="text" placeholder="Last Name" required onChange={(e) => handleInputChange(e, 'lastName')} isInvalid={!!errors.lastName} />
+                        <Form.Control.Feedback type="invalid">{errors.lastName}</Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group controlId="formEmail" className="form-group-spacing">
+                        <Form.Label className="form-title required-field">Email</Form.Label>
+                        <Form.Control type="email" placeholder="youremailaddress@gmail.com" required onChange={(e) => handleInputChange(e, 'email')} isInvalid={!!errors.email} />
+                        <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group controlId="formPhoneNumber" className="form-group-spacing">
+                        <Form.Label className="form-title required-field">Phone Number</Form.Label>
+                        <Form.Control type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required value={phoneNumber} onChange={handlePhoneNumberChange} isInvalid={!!errors.phoneNumber} />
+                        <Form.Control.Feedback type="invalid">{errors.phoneNumber}</Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group controlId="formCreditCardNumber" className="form-group-spacing">
+                        <Form.Label className="form-title required-field">Credit Card Number</Form.Label>
+                        <Form.Control type="text" placeholder="1234 5678 9012 3456" required value={cardNumber} onChange={handleCardNumberChange} isInvalid={!!errors.cardNumber} />
+                        <Form.Control.Feedback type="invalid">{errors.cardNumber}</Form.Control.Feedback>
+                    </Form.Group>
+                    <Row>
+                        <Col md={6}>
+                            <Form.Group controlId="formExpiryDate">
+                                <Form.Label className="form-title required-field">Expiry Date</Form.Label>
+                                <DatePicker
+                                    selected={expiryDate}
+                                    onChange={handleExpiryDateChange}
+                                    dateFormat="MM/yy"
+                                    showMonthYearPicker
+                                    placeholderText="MM/YY"
+                                    className={`form-control purple-datepicker ${errors.expiryDate ? 'is-invalid' : ''}`}
+                                    calendarClassName="purple-datepicker-calendar"
+                                />
+                                <Form.Control.Feedback type="invalid">{errors.expiryDate}</Form.Control.Feedback>
+                                <div className="text-danger">{errors.expiryDate}</div>
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group controlId="formCVV">
+                                <Form.Label className="form-title required-field">CVV</Form.Label>
+                                <Form.Control type="text" placeholder="***" required pattern="\d{3}" title="Please enter a 3-digit CVV number" maxLength={3} value={cvv} onChange={handleCvvChange} isInvalid={!!errors.cvv} />
+                                <Form.Control.Feedback type="invalid">{errors.cvv}</Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <div className="button-container">
+                        <Button variant="success" type="submit" className="confirm-button">Confirm Reservation</Button>
+                    </div>
+                </Form>
+            </Container>
+            <Modal show={showSuccessModal} onHide={closeModal} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Reservation Successful!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Thank you for your reservation! A confirmation has been sent to your email address.
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="success" onClick={closeModal}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+            <Footer />
+        </div>
+    );
 };
 
 export default Reserve;
