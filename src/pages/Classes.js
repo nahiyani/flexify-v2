@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Card, Pagination, InputGroup, FormControl, Dropdown, Button } from 'react-bootstrap';
 import Header from '../components/Header';
@@ -57,8 +57,8 @@ const Classes = () => {
   const [selectedFormats, setSelectedFormats] = useState([]);
   const [selectedRatings, setSelectedRatings] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [favorites, setFavorites] = useState([]);
-  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [favourites, setfavourites] = useState([]);
+  const [showfavouritesOnly, setShowfavouritesOnly] = useState(false);
 
   const classesPerPage = 4;
 
@@ -88,10 +88,9 @@ const Classes = () => {
       (selectedRatings.length === 0 || selectedRatings.includes(cls.rating))
     );
 
-    if (showFavoritesOnly) {
-      filtered = filtered.filter(cls => favorites.includes(cls.name));
+    if (showfavouritesOnly) {
+      filtered = filtered.filter(cls => favourites.includes(cls.name));
     } else {
-      // Apply additional filters based on active selections
       if (selectedInstructor !== 'All') {
         filtered = filtered.filter(cls => cls.instructor.name === selectedInstructor);
       }
@@ -118,9 +117,9 @@ const Classes = () => {
     return filtered;
   };
 
-  const toggleFavoritesOnly = () => {
-    setShowFavoritesOnly(!showFavoritesOnly);
-    if (!showFavoritesOnly) {
+  const togglefavouritesOnly = () => {
+    setShowfavouritesOnly(!showfavouritesOnly);
+    if (!showfavouritesOnly) {
       setSelectedInstructor('All');
       setSelectedClassTypes([]);
       setSelectedDifficulties([]);
@@ -132,17 +131,17 @@ const Classes = () => {
   };
 
   const toggleFavorite = (className) => {
-    if (favorites.includes(className)) {
-      setFavorites(favorites.filter(fav => fav !== className));
+    if (favourites.includes(className)) {
+      setfavourites(favourites.filter(fav => fav !== className));
     } else {
-      setFavorites([...favorites, className]);
+      setfavourites([...favourites, className]);
     }
   };
 
   useEffect(() => {
     setFilteredClasses(filterClasses());
     setCurrentPage(1);
-  }, [searchTerm, selectedInstructor, selectedClassTypes, selectedDifficulties, selectedDurations, selectedEquipment, selectedFormats, selectedRatings, allClasses, showFavoritesOnly, favorites]);
+  }, [searchTerm, selectedInstructor, selectedClassTypes, selectedDifficulties, selectedDurations, selectedEquipment, selectedFormats, selectedRatings, allClasses, showfavouritesOnly, favourites]);
 
   const indexOfLastClass = currentPage * classesPerPage;
   const indexOfFirstClass = indexOfLastClass - classesPerPage;
@@ -199,9 +198,9 @@ const Classes = () => {
       <div className="header text-center">
         <h1>CLASSES</h1>
         <p>
-          We offer a diverse range of fitness classes suitable for all levels. Our classes range from under 30 minutes to over an hour, 
-          with both live and on-demand options for maximum flexibility. Expert instructors provide 
-          personalized guidance to help you achieve your fitness goals. Join our supportive community to share your journey and get inspired! 
+          We offer a diverse range of fitness classes suitable for all levels. Our classes range from under 30 minutes to over an hour,
+          with both live and on-demand options for maximum flexibility. Expert instructors provide
+          personalized guidance to help you achieve your fitness goals. Join our supportive community to share your journey and get inspired!
         </p>
       </div>
       <div className="search">
@@ -268,13 +267,13 @@ const Classes = () => {
             ))}
           </div>
           <div className="facet">
-            <div className="facet-header">Favorite</div>
+            <div className="facet-header">Favourite</div>
             <Form.Check
               type="switch"
-              id="favorites-switch"
-              label="Show Favorites"
-              checked={showFavoritesOnly}
-              onChange={toggleFavoritesOnly}
+              id="favourites-switch"
+              label="Show Favourites Only"
+              checked={showfavouritesOnly}
+              onChange={togglefavouritesOnly}
               className="purple-checkbox"
             />
           </div>
@@ -347,18 +346,17 @@ const Classes = () => {
                     </Card.Text>
                     <Card.Text>{cls.description}</Card.Text>
                     <span
-                      className={`favorite-star ${favorites.includes(cls.name) ? 'favorited' : ''}`}
-                      onClick={() => toggleFavorite(cls.name)}
-                    >
+                      className={`favourite-star ${favourites.includes(cls.name) ? 'favorited' : ''}`}
+                      onClick={() => toggleFavorite(cls.name)}>
                       &#9733;
                     </span>
                   </div>
                 </div>
-                <Button className="purple-button" onClick={handleReserveClick}>
-                      <Link to="/reserve" className="nav-link-custom">
-                        RESERVE
-                      </Link>
+                <Link to="/reserve" className="nav-link-custom">
+                  <Button className="purple-button">
+                    RESERVE
                   </Button>
+                </Link>
               </Card.Body>
             </Card>
           ))}
