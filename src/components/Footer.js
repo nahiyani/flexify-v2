@@ -41,14 +41,14 @@ const Footer = () => {
             <h5>SOCIAL MEDIA</h5>
             <div className="social-icons">
               <Row>
-                <Col xs={4}><a href="#"><FontAwesomeIcon icon={faInstagram} /></a></Col>
-                <Col xs={4}><a href="#"><FontAwesomeIcon icon={faTwitter} /></a></Col>
-                <Col xs={4}><a href="#"><FontAwesomeIcon icon={faFacebookF} /></a></Col>
+                <Col xs={4}><a href="https://www.instagram.com/"><FontAwesomeIcon icon={faInstagram} /></a></Col>
+                <Col xs={4}><a href="https://x.com/home"><FontAwesomeIcon icon={faTwitter} /></a></Col>
+                <Col xs={4}><a href="https://www.facebook.com/"><FontAwesomeIcon icon={faFacebookF} /></a></Col>
               </Row>
               <Row>
-                <Col xs={4}><a href="#"><FontAwesomeIcon icon={faYoutube} /></a></Col>
-                <Col xs={4}><a href="#"><FontAwesomeIcon icon={faTiktok} /></a></Col>
-                <Col xs={4}><a href="#"><FontAwesomeIcon icon={faLinkedinIn} /></a></Col>
+                <Col xs={4}><a href="https://www.youtube.com/"><FontAwesomeIcon icon={faYoutube} /></a></Col>
+                <Col xs={4}><a href="https://www.tiktok.com/"><FontAwesomeIcon icon={faTiktok} /></a></Col>
+                <Col xs={4}><a href="https://www.linkedin.com/feed/"><FontAwesomeIcon icon={faLinkedinIn} /></a></Col>
               </Row>
             </div>
           </Col>

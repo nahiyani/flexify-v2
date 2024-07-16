@@ -343,6 +343,8 @@ const Classes = () => {
                         </>
                       )}
                       <strong>Rating:</strong> {cls.rating}<br />
+                      <strong style={{ fontSize: '40px', color: 'black'}}>Price: </strong> 
+                      <span style={{ fontSize: '40px', color: '#8E46C6', fontWeight: 'bold' }}>{cls.price}</span><br />
                     </Card.Text>
                     <Card.Text>{cls.description}</Card.Text>
                     <span

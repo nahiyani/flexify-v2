@@ -25,6 +25,7 @@ const Reserve = () => {
     const [lastName, setLastName] = useState('');
     const [datePlaceholder, setDatePlaceholder] = useState('Date');
     const [timePlaceholder, setTimePlaceholder] = useState('Time');
+    const [price, setPrice] = useState(null);
 
     const dropdownRef = useRef(null);
     const inputRef = useRef(null);
@@ -40,6 +41,7 @@ const Reserve = () => {
             setDatePlaceholder('Date');
             setTimePlaceholder('Time');
             setErrors(prev => ({ ...prev, class: 'Please select a class' }));
+            setPrice(null);
         } else {
             setErrors(prev => {
                 const newErrors = { ...prev };
@@ -58,6 +60,7 @@ const Reserve = () => {
                 setDatePlaceholder('On-demand class');
                 setTimePlaceholder('On-demand class');
             }
+            setPrice(selectedClassData.price);
         }
     };
 
@@ -221,6 +224,7 @@ const Reserve = () => {
         setLastName('');
         setDatePlaceholder('Date');
         setTimePlaceholder('Time');
+        setPrice(null);
     };
 
     useEffect(() => {
@@ -247,7 +251,7 @@ const Reserve = () => {
                 <h1 className="text-center headline">RESERVE A CLASS</h1>
                 <p className="text-center description">
                     Flexify strives to make the process of scheduling your fitness sessions as seamless and convenient as possible.
-                    Follow the simple steps below to reserve a spot in one of our many classes with a certified expert trainer and take the 
+                    Follow the simple steps below to reserve a spot in one of our many classes with a certified expert trainer and take the
                     first step towards achieving your fitness goals.
                 </p>
                 <Form className="reserve-form" onSubmit={handleSubmit} noValidate>
@@ -332,6 +336,14 @@ const Reserve = () => {
                         <Form.Control type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required value={phoneNumber} onChange={handlePhoneNumberChange} isInvalid={!!errors.phoneNumber} />
                         <Form.Control.Feedback type="invalid">{errors.phoneNumber}</Form.Control.Feedback>
                     </Form.Group>
+                    {price && (
+                        <div className="text-center mb-3">
+                            <div className="text-center mb-3">
+                                <span style={{ fontSize: '60px', color: 'black', fontWeight: 'bold' }}>TOTAL: </span>
+                                <span style={{ fontSize: '60px', color: '#8E46C6', fontWeight: 'bold' }}>{price}</span>
+                            </div>
+                        </div>
+                    )}
                     <Form.Group controlId="formCreditCardNumber" className="form-group-spacing">
                         <Form.Label className="form-title required-field">Credit Card Number</Form.Label>
                         <Form.Control type="text" placeholder="1234 5678 9012 3456" required value={cardNumber} onChange={handleCardNumberChange} isInvalid={!!errors.cardNumber} />
