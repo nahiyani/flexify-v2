@@ -3,6 +3,7 @@ import Footer from '../components/Footer';
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Pagination } from 'react-bootstrap';
 import './Instructors.css';
+import { Helmet } from 'react-helmet';
 
 import anaDeArmas from '../images/anadearmas.avif';
 import arnold from '../images/arnold.png';
@@ -55,6 +56,10 @@ export default function Instructors() {
 
   return (
     <div className="instructors">
+      <Helmet>
+        <title>Instructors - Flexify</title>
+        <meta name="description" content="This is a detailed description of the page." />
+      </Helmet>
       <Header />
       <header className="instructors-header text-center">
         <h1 className="instructor-headline">INSTRUCTORS</h1>

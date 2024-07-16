@@ -5,16 +5,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom'; 
 import './Home.css';
+import { Helmet } from 'react-helmet';
+
+import CardioBlast from '../images/classes/cardioblast.webp';
+import StrengthMastery from '../images/classes/strengthmastery.webp';
+import YogaRelaxation from '../images/classes/yogarelaxation.webp';
 
 import arnold from '../images/arnold.png';
 import dwayneJohnson from '../images/dwaynejohnson.webp';
 import ericWinter from '../images/ericwinter.webp';
 import scarlettJohansson from '../images/scarlettjohansson.webp';
-import alyssaRodriguez from '../images/alyssarodriguez.jpg'
+import alyssaRodriguez from '../images/alyssarodriguez.jpg';
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Flexify</title>
+        <meta name="description" content="This is a detailed description of the page." />
+      </Helmet>
       <Header />
       <div className="fitness-studio">
         <section className="hero-section text-center">
@@ -35,10 +44,10 @@ const Home = () => {
               </p>
             </div>
             <Link to="/library" className="nav-link-custom">
-                <Button className='purple-button header-button'>
-                  EXPLORE OUR COLLECTION
-                </Button>
-              </Link>
+              <Button className='purple-button header-button'>
+                EXPLORE OUR COLLECTION
+              </Button>
+            </Link>
           </div>
         </section>
 
@@ -48,33 +57,39 @@ const Home = () => {
             <Row>
               <Col md={4}>
                 <Card className="featured-class-card">
-                  <div className="placeholder-image"></div>
+                  <div className="placeholder-image">
+                    <img src={CardioBlast} alt="Cardio Blast" className="featured-class-image" />
+                  </div>
                   <Card.Body>
                     <Card.Title className='featured-classes-title'>Cardio Blast</Card.Title>
                     <Card.Text>
-                    An energetic cardio class to get your heart pumping!
+                      An energetic cardio class to get your heart pumping!
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={4}>
                 <Card className="featured-class-card">
-                  <div className="placeholder-image"></div>
+                  <div className="placeholder-image">
+                    <img src={StrengthMastery} alt="Strength Mastery" className="featured-class-image" />
+                  </div>
                   <Card.Body>
                     <Card.Title className='featured-classes-title'>Strength Mastery</Card.Title>
                     <Card.Text>
-                    Build your strength with this comprehensive workout.
+                      Build your strength with this comprehensive workout.
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={4}>
                 <Card className="featured-class-card">
-                  <div className="placeholder-image"></div>
+                  <div className="placeholder-image">
+                    <img src={YogaRelaxation} alt="Yoga Relaxation" className="featured-class-image" />
+                  </div>
                   <Card.Body>
                     <Card.Title className='featured-classes-title'>Yoga Relaxation</Card.Title>
                     <Card.Text>
-                    Relax and unwind with this gentle and serene yoga class.
+                      Relax and unwind with this gentle and serene yoga class.
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -154,16 +169,16 @@ const Home = () => {
           <Container>
             <Row>
               <Col md={2}>
-              <img src={alyssaRodriguez} alt="Arnold Schwarzenegger" className="testimonial-image" />
+                <img src={alyssaRodriguez} alt="Alyssa Rodriguez" className="testimonial-image" />
               </Col>
               <Col md={10}>
                 <blockquote className="blockquote">
                   <p id='testimony-text'>
-                  "I've been using Flexify for over a year now, and it has completely transformed my fitness journey. 
-                  The extensive library of articles and guides has been incredibly helpful in educating me about 
-                  different workout routines and nutrition tips. The BMI calculator is a great tool to keep track of 
-                  my progress. The convenience of having everything in one place has made it so much easier to stay 
-                  consistent and achieve my fitness goals. Flexify is a <b><em>game-changer</em></b> for anyone looking to improve their health and fitness!"
+                    "I've been using Flexify for over a year now, and it has completely transformed my fitness journey. 
+                    The extensive library of articles and guides has been incredibly helpful in educating me about 
+                    different workout routines and nutrition tips. The BMI calculator is a great tool to keep track of 
+                    my progress. The convenience of having everything in one place has made it so much easier to stay 
+                    consistent and achieve my fitness goals. Flexify is a <b><em>game-changer</em></b> for anyone looking to improve their health and fitness!"
                   </p>
                   <footer className="blockquote-footer">ALYSSA RODRIGUEZ, Customer</footer>
                 </blockquote>

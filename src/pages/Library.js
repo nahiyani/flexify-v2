@@ -3,10 +3,15 @@ import { Card, Button, Form, Carousel } from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Library.css';
+import { Helmet } from 'react-helmet';
 
 import articleImage1 from '../images/article1.webp';
 import articleImage2 from '../images/article2.webp';
 import articleImage3 from '../images/article3.webp';
+import guideImage1 from '../images/guide1.webp';
+import guideImage2 from '../images/guide2.webp';
+import guideImage3 from '../images/guide3.webp';
+
 
 const Library = () => {
   const [bmi, setBmi] = useState(null);
@@ -83,6 +88,10 @@ const Library = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Library - Flexify</title>
+        <meta name="description" content="This is a detailed description of the page." />
+      </Helmet>
       <Header />
       <div className="library-container">
         <div className='library-intro'>
@@ -148,35 +157,45 @@ const Library = () => {
           <Carousel className="guides-carousel">
             <Carousel.Item>
               <Card className="guide-card">
-                <div className="placeholder-img guide-img" style={{ backgroundImage: "url('/path/to/guide1.jpg')" }}></div>
+                <div 
+                    className="placeholder-img guide-img" 
+                    style={{ backgroundImage: `url(${guideImage1})` }}
+              ></div>
                 <Card.Body className="text-center">
-                  <Card.Title>Guide #1</Card.Title>
-                  <Card.Text>A brief description of Guide #1...</Card.Text>
+                  <Card.Title className='guide-title'>The Definitive Guide to Healthy Eating in Real Life</Card.Title>
+                  <Card.Text>To eat healthier, start by making small changes. Make each meal or snack contain nutrient-dense foods, and try to avoid processed foods...</Card.Text>
+                  <Button className="learn-more-guides-btn" href='https://www.healthline.com/nutrition/how-to-eat-healthy-guide'>Learn More</Button>
+                </Card.Body>
+              </Card>
+            </Carousel.Item>
+            <Carousel.Item>
+              <Card className="guide-card">
+              <div 
+                    className="placeholder-img guide-img" 
+                    style={{ backgroundImage: `url(${guideImage2})` }}
+              ></div>
+                <Card.Body className="text-center">
+                  <Card.Title className='guide-title'>Why Spending Just Two Hours a Week in Nature Is Good for You</Card.Title>
+                  <Card.Text>Recent research has found clear evidence that going for a hike can help your health....</Card.Text>
                   <Button className="learn-more-guides-btn">Learn More</Button>
                 </Card.Body>
               </Card>
             </Carousel.Item>
             <Carousel.Item>
               <Card className="guide-card">
-                <div className="placeholder-img guide-img" style={{ backgroundImage: "url('/path/to/guide2.jpg')" }}></div>
+              <div 
+                    className="placeholder-img guide-img" 
+                    style={{ backgroundImage: `url(${guideImage3})` }}
+              ></div>
                 <Card.Body className="text-center">
-                  <Card.Title>Guide #2</Card.Title>
-                  <Card.Text>A brief description of Guide #2...</Card.Text>
-                  <Button className="learn-more-guides-btn">Learn More</Button>
-                </Card.Body>
-              </Card>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Card className="guide-card">
-                <div className="placeholder-img guide-img" style={{ backgroundImage: "url('/path/to/guide3.jpg')" }}></div>
-                <Card.Body className="text-center">
-                  <Card.Title>Guide #3</Card.Title>
-                  <Card.Text>A brief description of Guide #3...</Card.Text>
+                  <Card.Title className='guide-title'>The 8 Best Waterproof Fitness Trackers</Card.Title>
+                  <Card.Text>Fitness trackers not only monitor your daily activity levels but also may help you take control of your health with features like...</Card.Text>
                   <Button className="learn-more-guides-btn">Learn More</Button>
                 </Card.Body>
               </Card>
             </Carousel.Item>
           </Carousel>
+          <Button className="explore-more-guides-btn" href='https://www.healthline.com/search?q1=fitness'>Explore More Guides</Button>
         </div>
 
         <div className="podcasts-section">
@@ -200,17 +219,17 @@ const Library = () => {
           <Form onSubmit={calculateBMI} className="bmi-form">
             <div className="bmi-inputs">
               <Form.Group className="position-relative">
-                <Form.Label className="bmi-label">Age</Form.Label>
+                <Form.Label className="bmi-label required-field">Age</Form.Label>
                 <Form.Control type="number" name="age" className={`bmi-input ${errors.age ? 'is-invalid' : ''}`} required min="0" onChange={(e) => handleInputChange(e, 'age')} />
                 {errors.age && <div className="text-danger">{errors.age}</div>}
               </Form.Group>
               <Form.Group className="position-relative">
-                <Form.Label className="bmi-label">Height (cm)</Form.Label>
+                <Form.Label className="bmi-label required-field">Height (cm)</Form.Label>
                 <Form.Control type="number" name="height" className={`bmi-input ${errors.height ? 'is-invalid' : ''}`} required min="0" step="0.01" onChange={(e) => handleInputChange(e, 'height')} />
                 {errors.height && <div className="text-danger">{errors.height}</div>}
               </Form.Group>
               <Form.Group className="position-relative">
-                <Form.Label className="bmi-label">Weight (kg)</Form.Label>
+                <Form.Label className="bmi-label required-field">Weight (kg)</Form.Label>
                 <Form.Control type="number" name="weight" className={`bmi-input ${errors.weight ? 'is-invalid' : ''}`} required min="0" step="0.01" onChange={(e) => handleInputChange(e, 'weight')} />
                 {errors.weight && <div className="text-danger">{errors.weight}</div>}
               </Form.Group>

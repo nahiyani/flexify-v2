@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Container, Form, Button, Row, Col, Modal } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -6,10 +6,11 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Reserve.css';
 import { classNames } from '../data';
+import { Helmet } from 'react-helmet';
 
 const Reserve = () => {
-    const [startDate, setStartDate] = useState(new Date());
-    const [startTime, setStartTime] = useState(new Date());
+    const [startDate, setStartDate] = useState(null);
+    const [startTime, setStartTime] = useState('');
     const [expiryDate, setExpiryDate] = useState(new Date());
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [selectedClass, setSelectedClass] = useState(null);
@@ -17,18 +18,30 @@ const Reserve = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [cvv, setCvv] = useState('');
     const [errors, setErrors] = useState({});
+    const [searchTerm, setSearchTerm] = useState('');
+    const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [datePlaceholder, setDatePlaceholder] = useState('Date');
+    const [timePlaceholder, setTimePlaceholder] = useState('Time');
 
-    const handleClassChange = (event) => {
-        const selectedClassName = event.target.value;
-        const selectedClassData = classNames.find((cls) => cls.name === selectedClassName);
+    const dropdownRef = useRef(null);
+    const inputRef = useRef(null);
+
+    const handleClassChange = (selectedClassData) => {
         setSelectedClass(selectedClassData);
+        setSearchTerm(selectedClassData.name);
+        setDropdownVisible(false);
 
         if (!selectedClassData) {
-            setStartDate(new Date());
-            setStartTime(new Date());
-            setErrors((prev) => ({ ...prev, class: 'Please select a class' }));
+            setStartDate(null);
+            setStartTime('');
+            setDatePlaceholder('Date');
+            setTimePlaceholder('Time');
+            setErrors(prev => ({ ...prev, class: 'Please select a class' }));
         } else {
-            setErrors((prev) => {
+            setErrors(prev => {
                 const newErrors = { ...prev };
                 delete newErrors.class;
                 return newErrors;
@@ -36,13 +49,26 @@ const Reserve = () => {
 
             if (selectedClassData.format === 'Live') {
                 setStartDate(new Date(selectedClassData.date));
-                setStartTime(new Date(`${selectedClassData.date} ${selectedClassData.time}`));
+                setStartTime(selectedClassData.time);
+                setDatePlaceholder(selectedClassData.date);
+                setTimePlaceholder(selectedClassData.time);
             } else {
                 setStartDate(null);
-                setStartTime(null);
+                setStartTime('');
+                setDatePlaceholder('On-demand class');
+                setTimePlaceholder('On-demand class');
             }
         }
     };
+
+    const classOptions = classNames.map((cls) => ({
+        value: cls,
+        label: cls.name
+    }));
+
+    const filteredClassOptions = classOptions.filter((option) =>
+        option.label.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const validateField = (fieldName, value) => {
         const newErrors = { ...errors };
@@ -92,7 +118,7 @@ const Reserve = () => {
             case 'expiryDate':
                 const expiry = new Date(value);
                 const now = new Date();
-                if (expiry < now) {
+                if (expiry < new Date(now.getFullYear(), now.getMonth(), 1)) {
                     newErrors.expiryDate = 'Credit card expiry date cannot be in the past.';
                 } else {
                     delete newErrors.expiryDate;
@@ -118,7 +144,7 @@ const Reserve = () => {
 
             const expiry = new Date(expiryDate);
             const now = new Date();
-            if (expiry < now) {
+            if (expiry < new Date(now.getFullYear(), now.getMonth(), 1)) {
                 newErrors.expiryDate = 'Credit card expiry date cannot be in the past.';
             }
 
@@ -163,7 +189,15 @@ const Reserve = () => {
     };
 
     const handleInputChange = (event, field) => {
-        validateField(field, event.target.value);
+        const { value } = event.target;
+        if (field === 'email') {
+            setEmail(value);
+        } else if (field === 'firstName') {
+            setFirstName(value);
+        } else if (field === 'lastName') {
+            setLastName(value);
+        }
+        validateField(field, value);
     };
 
     const handleExpiryDateChange = (date) => {
@@ -173,11 +207,41 @@ const Reserve = () => {
 
     const closeModal = () => {
         setShowSuccessModal(false);
-        setErrors({});  // Clear errors when modal is closed
+        setErrors({});
+        setSelectedClass(null);
+        setSearchTerm('');
+        setStartDate(null);
+        setStartTime('');
+        setExpiryDate(new Date());
+        setCardNumber('');
+        setPhoneNumber('');
+        setCvv('');
+        setEmail('');
+        setFirstName('');
+        setLastName('');
+        setDatePlaceholder('Date');
+        setTimePlaceholder('Time');
     };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownVisible(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
         <div>
+            <Helmet>
+                <title>Reserve - Flexify</title>
+                <meta name="description" content="This is a detailed description of the page." />
+            </Helmet>
             <Header />
             <Container className="reserve-container">
                 <h1 className="text-center headline">RESERVE A CLASS</h1>
@@ -187,14 +251,34 @@ const Reserve = () => {
                     first step towards achieving your fitness goals.
                 </p>
                 <Form className="reserve-form" onSubmit={handleSubmit} noValidate>
-                    <Form.Group controlId="formSubject">
+                    <Form.Group controlId="formSubject" ref={dropdownRef}>
                         <Form.Label className="form-title required-field">Class</Form.Label>
-                        <Form.Control as="select" required className="dropdown-with-arrow" onChange={handleClassChange} isInvalid={!!errors.class}>
-                            <option>Select a class</option>
-                            {classNames.map((className, index) => (
-                                <option key={index}>{className.name}</option>
-                            ))}
-                        </Form.Control>
+                        <Form.Control
+                            type="text"
+                            placeholder="Search for a class"
+                            value={searchTerm}
+                            onChange={(e) => {
+                                setSearchTerm(e.target.value);
+                                setSelectedClass(null); // Allow backspacing to clear selection
+                                setDropdownVisible(true);
+                            }}
+                            onFocus={() => setDropdownVisible(true)}
+                            className="dropdown-with-arrow"
+                            ref={inputRef}
+                        />
+                        {dropdownVisible && (
+                            <div className="dropdown-menu show" style={{ width: inputRef.current ? `${inputRef.current.offsetWidth}px` : '100%' }}>
+                                {filteredClassOptions.map((option) => (
+                                    <div
+                                        key={option.value.id}
+                                        className="dropdown-item"
+                                        onClick={() => handleClassChange(option.value)}
+                                    >
+                                        {option.label}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                         <Form.Control.Feedback type="invalid">{errors.class}</Form.Control.Feedback>
                     </Form.Group>
                     <Row>
@@ -205,10 +289,10 @@ const Reserve = () => {
                                     selected={startDate}
                                     onChange={(date) => setStartDate(date)}
                                     dateFormat="dd-MM-yyyy"
-                                    placeholderText="Select date"
+                                    placeholderText={datePlaceholder}
                                     className={`form-control purple-datepicker`}
                                     calendarClassName="purple-datepicker-calendar"
-                                    disabled={selectedClass && (selectedClass.format === 'On Demand' || selectedClass.format === 'Live')}
+                                    disabled={true}
                                 />
                                 <div className="text-danger">{errors.startDate}</div>
                             </Form.Group>
@@ -216,18 +300,13 @@ const Reserve = () => {
                         <Col md={6}>
                             <Form.Group controlId="formTime" className="time-picker-container">
                                 <Form.Label className="form-title">Time</Form.Label>
-                                <DatePicker
-                                    selected={startTime}
-                                    onChange={(time) => setStartTime(time)}
-                                    showTimeSelect
-                                    showTimeSelectOnly
-                                    timeIntervals={15}
-                                    timeCaption="Time"
-                                    dateFormat="h:mm aa"
-                                    placeholderText="Select time"
+                                <Form.Control
+                                    type="text"
+                                    placeholder={timePlaceholder}
+                                    value={startTime}
+                                    onChange={(e) => setStartTime(e.target.value)}
                                     className="form-control purple-datepicker"
-                                    calendarClassName="purple-datepicker-calendar"
-                                    disabled={selectedClass && (selectedClass.format === 'On Demand' || selectedClass.format === 'Live')}
+                                    disabled={true}
                                 />
                                 {errors.startTime && <div className="text-danger">{errors.startTime}</div>}
                             </Form.Group>
@@ -235,17 +314,17 @@ const Reserve = () => {
                     </Row>
                     <Form.Group controlId="formFirstName" className="form-group-spacing">
                         <Form.Label className="form-title required-field">First Name</Form.Label>
-                        <Form.Control type="text" placeholder="First Name" required onChange={(e) => handleInputChange(e, 'firstName')} isInvalid={!!errors.firstName} />
+                        <Form.Control type="text" placeholder="First Name" required value={firstName} onChange={(e) => handleInputChange(e, 'firstName')} isInvalid={!!errors.firstName} />
                         <Form.Control.Feedback type="invalid">{errors.firstName}</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="formLastName" className="form-group-spacing">
                         <Form.Label className="form-title required-field">Last Name</Form.Label>
-                        <Form.Control type="text" placeholder="Last Name" required onChange={(e) => handleInputChange(e, 'lastName')} isInvalid={!!errors.lastName} />
+                        <Form.Control type="text" placeholder="Last Name" required value={lastName} onChange={(e) => handleInputChange(e, 'lastName')} isInvalid={!!errors.lastName} />
                         <Form.Control.Feedback type="invalid">{errors.lastName}</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="formEmail" className="form-group-spacing">
                         <Form.Label className="form-title required-field">Email</Form.Label>
-                        <Form.Control type="email" placeholder="youremailaddress@gmail.com" required onChange={(e) => handleInputChange(e, 'email')} isInvalid={!!errors.email} />
+                        <Form.Control type="email" placeholder="youremailaddress@gmail.com" required value={email} onChange={(e) => handleInputChange(e, 'email')} isInvalid={!!errors.email} />
                         <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="formPhoneNumber" className="form-group-spacing">
@@ -289,11 +368,11 @@ const Reserve = () => {
                 </Form>
             </Container>
             <Modal show={showSuccessModal} onHide={closeModal} centered>
-                <Modal.Header closeButton>
+                <Modal.Header style={{ backgroundColor: 'green', color: 'white' }} closeButton>
                     <Modal.Title>Reservation Successful!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Thank you for your reservation! A confirmation has been sent to your email address.
+                    Thank you for your class reservation, <strong style={{ color: '#8E46C6' }}>{firstName}</strong>! A confirmation outlining the details has been sent to <strong style={{ color: '#8E46C6' }}>{email}</strong>.
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="success" onClick={closeModal}>Close</Button>

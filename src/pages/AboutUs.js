@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import './AboutUs.css';
+import { Helmet } from 'react-helmet';
 
 import theRock from '../images/therock.jpg'
 import ryanReynolds from '../images/ryanreynolds.jpg'
@@ -46,6 +47,10 @@ const AboutUs = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>About Us - Flexify</title>
+        <meta name="description" content="This is a detailed description of the page." />
+      </Helmet>
       <Header />
       <div className="about-container">
         <div className="flexify-advantage">

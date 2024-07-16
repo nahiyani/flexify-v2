@@ -116,7 +116,7 @@ const Footer = () => {
       </Container>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton style={{ backgroundColor: '#7ED321', color: 'white' }}>
+        <Modal.Header closeButton style={{ backgroundColor: 'green', color: 'white' }}>
           <Modal.Title>Subscription Successful!</Modal.Title>
         </Modal.Header>
         <Modal.Body>Thank you for subscribing! A confirmation email has been sent to {email}.</Modal.Body>

@@ -2,7 +2,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.main-header{
+.main-header {
   font-size: 65px !important;
 }
 
@@ -59,7 +59,7 @@
   margin-top: 50px;
 }
 
-.header-button{
+.header-button {
   margin: 20px 0;
 }
 
@@ -79,6 +79,15 @@
 .featured-classes .card {
   margin-bottom: 20px;
   position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.featured-class-image {
+  width: 90%;
+  height: 200px;
+  object-fit: cover;
+  margin: 20px auto 0; /* Center the image and add padding on top */
   border-radius: 15px;
 }
 
@@ -191,7 +200,7 @@ img {
   height: 250px; /* Ensures the image covers the height */
   object-fit: cover; /* Ensures the image covers the div without distortion */
   margin-right: 20%;
-  }
+}
 
 .testimony-section .blockquote {
   text-align: left;
