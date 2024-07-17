@@ -119,9 +119,9 @@ const AboutUs = () => {
               <p>
                 As Flexify's COO, Ryan Reynolds brings his sharp wit and business acumen to the team.
                 Known for his charismatic acting career and entrepreneurial ventures, Ryan ensures
-                seamless operations and innovative strategies at Flexify. His commitment to wellness
+                seamless operations at Flexify. His commitment to wellness
                 and creativity helps drive the company's mission to provide engaging, high-quality
-                fitness experiences to users worldwide.
+                fitness experiences to users.
               </p>
             </div>
             <div className="executive-card">
@@ -132,9 +132,9 @@ const AboutUs = () => {
               <h4>Chief Financial Officer</h4>
               <p>
                 Legendary quarterback Tom Brady, now Flexify's CFO, applies his strategic mindset
-                and competitive spirit to the company's financial leadership. With an illustrious
+                to the company's financial leadership. With an illustrious
                 career in the NFL, Tom's expertise in performance and resilience translates into robust
-                financial strategies for Flexify, ensuring sustainable growth and the continued delivery
+                financial strategies for Flexify, ensuring the continued delivery
                 of exceptional fitness programs to its users.
               </p>
             </div>
