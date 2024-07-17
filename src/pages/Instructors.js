@@ -1,9 +1,10 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Pagination } from 'react-bootstrap';
 import './Instructors.css';
 import { Helmet } from 'react-helmet';
+import { useLocation } from 'react-router-dom';
 
 import anaDeArmas from '../images/anadearmas.avif';
 import arnold from '../images/arnold.png';
@@ -21,6 +22,16 @@ import timotheeChalamet from '../images/timotheechalametfake.jpg';
 import tomHolland from '../images/tomholland.webp';
 import willSmith from '../images/willsmith.png';
 import zaraLarsson from '../images/zaralarsson.jpg';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const instructorData = [
   { name: 'Ana de Armas', specialty1: 'Pilates', specialty2: 'Yoga', image: anaDeArmas },
@@ -60,6 +71,7 @@ export default function Instructors() {
         <title>Instructors - Flexify</title>
         <meta name="description" content="This is a detailed description of the page." />
       </Helmet>
+      <ScrollToTop />
       <Header />
       <header className="instructors-header text-center">
         <h1 className="instructor-headline">INSTRUCTORS</h1>

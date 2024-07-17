@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import './AboutUs.css';
 import { Helmet } from 'react-helmet';
+import { useLocation } from 'react-router-dom';
 
-import theRock from '../images/therock.jpg'
-import ryanReynolds from '../images/ryanreynolds.jpg'
-import tomBrady from '../images/tombrady.jpg'
+import theRock from '../images/therock.jpg';
+import ryanReynolds from '../images/ryanreynolds.jpg';
+import tomBrady from '../images/tombrady.jpg';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const AccordionItem = ({ title, content, isOpen, onClick }) => {
   return (
@@ -51,6 +62,7 @@ const AboutUs = () => {
         <title>About Us - Flexify</title>
         <meta name="description" content="This is a detailed description of the page." />
       </Helmet>
+      <ScrollToTop />
       <Header />
       <div className="about-container">
         <div className="flexify-advantage">
@@ -70,14 +82,14 @@ const AboutUs = () => {
 
         <div className="our-story">
           <div className='our-story-container'>
-          <h2 className="our-story-title">OUR STORY</h2>
-          <p>
-          Flexify was born when Dwayne "The Rock" Johnson envisioned a fitness platform accessible to all. 
-          Inspired by his journey from wrestler to actor, he aimed to create a space where people could train 
-          with top instructors anytime, anywhere. With his relentless drive and commitment to fitness, Flexify 
-          now offers diverse, live and on-demand classes, helping users achieve their goals with the same 
-          discipline and passion that fueled The Rock's success.
-          </p>
+            <h2 className="our-story-title">OUR STORY</h2>
+            <p>
+              Flexify was born when Dwayne "The Rock" Johnson envisioned a fitness platform accessible to all.
+              Inspired by his journey from wrestler to actor, he aimed to create a space where people could train
+              with top instructors anytime, anywhere. With his relentless drive and commitment to fitness, Flexify
+              now offers diverse, live and on-demand classes, helping users achieve their goals with the same
+              discipline and passion that fueled The Rock's success.
+            </p>
           </div>
         </div>
 
@@ -85,31 +97,31 @@ const AboutUs = () => {
           <h2>MEET THE EXECUTIVES</h2>
           <div className="executives">
             <div className="executive-card">
-            <div className="executive-photo">
-              <img src={theRock} alt="Dwayne Johnson" />
-            </div>
+              <div className="executive-photo">
+                <img src={theRock} alt="Dwayne Johnson" />
+              </div>
               <h3>DWAYNE JOHNSON</h3>
               <h4>Chief Executive Officer</h4>
               <p>
-              Renowned for his incredible journey from wrestling champion to Hollywood star, 
-              Dwayne Johnson founded Flexify to make top-tier fitness accessible to all. His 
-              dedication, discipline, and relentless drive inspire the platform, offering a diverse 
-              range of classes to help users achieve their fitness goals with the same passion that 
-              fuels his success.
+                Renowned for his incredible journey from wrestling champion to Hollywood star,
+                Dwayne Johnson founded Flexify to make top-tier fitness accessible to all. His
+                dedication, discipline, and relentless drive inspire the platform, offering a diverse
+                range of classes to help users achieve their fitness goals with the same passion that
+                fuels his success.
               </p>
             </div>
             <div className="executive-card">
-            <div className="executive-photo">
-              <img src={ryanReynolds} alt="Ryan Reynolds" />
-            </div>
+              <div className="executive-photo">
+                <img src={ryanReynolds} alt="Ryan Reynolds" />
+              </div>
               <h3>RYAN REYNOLDS</h3>
               <h4>Chief Operating Officer</h4>
               <p>
-              As Flexify's COO, Ryan Reynolds brings his sharp wit and business acumen to the team. 
-              Known for his charismatic acting career and entrepreneurial ventures, Ryan ensures 
-              seamless operations and innovative strategies at Flexify. His commitment to wellness 
-              and creativity helps drive the company's mission to provide engaging, high-quality 
-              fitness experiences to users worldwide.
+                As Flexify's COO, Ryan Reynolds brings his sharp wit and business acumen to the team.
+                Known for his charismatic acting career and entrepreneurial ventures, Ryan ensures
+                seamless operations and innovative strategies at Flexify. His commitment to wellness
+                and creativity helps drive the company's mission to provide engaging, high-quality
+                fitness experiences to users worldwide.
               </p>
             </div>
             <div className="executive-card">
@@ -119,11 +131,11 @@ const AboutUs = () => {
               <h3>TOM BRADY</h3>
               <h4>Chief Financial Officer</h4>
               <p>
-              Legendary quarterback Tom Brady, now Flexify's CFO, applies his strategic mindset 
-              and competitive spirit to the company's financial leadership. With an illustrious 
-              career in the NFL, Tom's expertise in performance and resilience translates into robust 
-              financial strategies for Flexify, ensuring sustainable growth and the continued delivery 
-              of exceptional fitness programs to its users.
+                Legendary quarterback Tom Brady, now Flexify's CFO, applies his strategic mindset
+                and competitive spirit to the company's financial leadership. With an illustrious
+                career in the NFL, Tom's expertise in performance and resilience translates into robust
+                financial strategies for Flexify, ensuring sustainable growth and the continued delivery
+                of exceptional fitness programs to its users.
               </p>
             </div>
           </div>

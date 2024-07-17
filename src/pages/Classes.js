@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Card, Pagination, InputGroup, FormControl, Dropdown, Button } from 'react-bootstrap';
 import Header from '../components/Header';
@@ -37,13 +37,27 @@ import CardioSculpt from '../images/classes/cardiosculpt.webp';
 import PilatesBalance from '../images/classes/pilatesbalance.webp';
 import StrengthCircuit from '../images/classes/strengthcircuit.webp';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const classTypes = ['Cardio', 'HIIT', 'Pilates', 'Strength Training', 'Yoga'];
 const difficulties = ['Beginner', 'Intermediate', 'Advanced'];
 const durations = ['< 30 minutes', '30 - 60 minutes', '> 60 minutes'];
-const equipment = ['No Equipment', 'Dumbbells', 'Resistance Bands', 'Step Platform', 'Yoga Mat'];
+const equipment = ['Dumbbells', 'No Equipment', 'Resistance Bands', 'Step Platform', 'Yoga Mat'];
 const formats = ['Live', 'On Demand'];
 const ratings = ['1 star', '2 stars', '3 stars', '4 stars', '5 stars'];
+const priceRanges = [
+  { label: '$10.00 - $14.99', min: 10.00, max: 14.99 },
+  { label: '$15.00 - $19.99', min: 15.00, max: 19.99 },
+  { label: '$20.00 - $24.99', min: 20.00, max: 24.99 }
+];
 
 const Classes = () => {
   const [allClasses, setAllClasses] = useState(classNames);
@@ -56,11 +70,13 @@ const Classes = () => {
   const [selectedEquipment, setSelectedEquipment] = useState([]);
   const [selectedFormats, setSelectedFormats] = useState([]);
   const [selectedRatings, setSelectedRatings] = useState([]);
+  const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [favourites, setfavourites] = useState([]);
-  const [showfavouritesOnly, setShowfavouritesOnly] = useState(false);
+  const [favourites, setFavourites] = useState([]);
+  const [showFavouritesOnly, setShowFavouritesOnly] = useState(false);
 
   const classesPerPage = 4;
+  const navigate = useNavigate();
 
   const handleDropdownSelect = (key, value) => {
     switch (key) {
@@ -85,41 +101,23 @@ const Classes = () => {
       (selectedDurations.length === 0 || selectedDurations.includes(cls.duration)) &&
       (selectedEquipment.length === 0 || selectedEquipment.includes(cls.equipment)) &&
       (selectedFormats.length === 0 || selectedFormats.includes(cls.format)) &&
-      (selectedRatings.length === 0 || selectedRatings.includes(cls.rating))
+      (selectedRatings.length === 0 || selectedRatings.includes(cls.rating)) &&
+      (selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
+        const price = parseFloat(cls.price.replace('$', ''));
+        return price >= range.min && price <= range.max;
+      }))
     );
 
-    if (showfavouritesOnly) {
+    if (showFavouritesOnly) {
       filtered = filtered.filter(cls => favourites.includes(cls.name));
-    } else {
-      if (selectedInstructor !== 'All') {
-        filtered = filtered.filter(cls => cls.instructor.name === selectedInstructor);
-      }
-      if (selectedClassTypes.length > 0) {
-        filtered = filtered.filter(cls => selectedClassTypes.includes(cls.classType));
-      }
-      if (selectedDifficulties.length > 0) {
-        filtered = filtered.filter(cls => selectedDifficulties.includes(cls.difficulty));
-      }
-      if (selectedDurations.length > 0) {
-        filtered = filtered.filter(cls => selectedDurations.includes(cls.duration));
-      }
-      if (selectedEquipment.length > 0) {
-        filtered = filtered.filter(cls => selectedEquipment.includes(cls.equipment));
-      }
-      if (selectedFormats.length > 0) {
-        filtered = filtered.filter(cls => selectedFormats.includes(cls.format));
-      }
-      if (selectedRatings.length > 0) {
-        filtered = filtered.filter(cls => selectedRatings.includes(cls.rating));
-      }
     }
 
     return filtered;
   };
 
-  const togglefavouritesOnly = () => {
-    setShowfavouritesOnly(!showfavouritesOnly);
-    if (!showfavouritesOnly) {
+  const toggleFavouritesOnly = () => {
+    setShowFavouritesOnly(!showFavouritesOnly);
+    if (!showFavouritesOnly) {
       setSelectedInstructor('All');
       setSelectedClassTypes([]);
       setSelectedDifficulties([]);
@@ -127,21 +125,22 @@ const Classes = () => {
       setSelectedEquipment([]);
       setSelectedFormats([]);
       setSelectedRatings([]);
+      setSelectedPriceRanges([]);
     }
   };
 
   const toggleFavorite = (className) => {
     if (favourites.includes(className)) {
-      setfavourites(favourites.filter(fav => fav !== className));
+      setFavourites(favourites.filter(fav => fav !== className));
     } else {
-      setfavourites([...favourites, className]);
+      setFavourites([...favourites, className]);
     }
   };
 
   useEffect(() => {
     setFilteredClasses(filterClasses());
     setCurrentPage(1);
-  }, [searchTerm, selectedInstructor, selectedClassTypes, selectedDifficulties, selectedDurations, selectedEquipment, selectedFormats, selectedRatings, allClasses, showfavouritesOnly, favourites]);
+  }, [searchTerm, selectedInstructor, selectedClassTypes, selectedDifficulties, selectedDurations, selectedEquipment, selectedFormats, selectedRatings, selectedPriceRanges, allClasses, showFavouritesOnly, favourites]);
 
   const indexOfLastClass = currentPage * classesPerPage;
   const indexOfFirstClass = indexOfLastClass - classesPerPage;
@@ -150,8 +149,8 @@ const Classes = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleReserveClick = () => {
-    console.log("Reserve button clicked!");
+  const handleReserveClick = (cls) => {
+    navigate('/reserve', { state: { selectedClass: cls } });
   };
 
   const getClassImage = (className) => {
@@ -194,6 +193,7 @@ const Classes = () => {
         <title>Classes - Flexify</title>
         <meta name="description" content="This is a detailed description of the page." />
       </Helmet>
+      <ScrollToTop />
       <Header />
       <div className="header text-center">
         <h1>CLASSES</h1>
@@ -272,8 +272,8 @@ const Classes = () => {
               type="switch"
               id="favourites-switch"
               label="Show Favourites Only"
-              checked={showfavouritesOnly}
-              onChange={togglefavouritesOnly}
+              checked={showFavouritesOnly}
+              onChange={toggleFavouritesOnly}
               className="purple-checkbox"
             />
           </div>
@@ -304,6 +304,19 @@ const Classes = () => {
                 ))}
               </Dropdown.Menu>
             </Dropdown>
+          </div>
+          <div className="facet">
+            <div className="facet-header">Price Range</div>
+            {priceRanges.map((range) => (
+              <Form.Check
+                key={range.label}
+                type="checkbox"
+                label={range.label}
+                checked={selectedPriceRanges.includes(range)}
+                onChange={() => handleCheckboxChange(setSelectedPriceRanges, selectedPriceRanges, range)}
+                className="purple-checkbox"
+              />
+            ))}
           </div>
           <div className="facet">
             <div className="facet-header">Rating</div>
@@ -354,11 +367,9 @@ const Classes = () => {
                     </span>
                   </div>
                 </div>
-                <Link to="/reserve" className="nav-link-custom">
-                  <Button className="purple-button">
-                    RESERVE
-                  </Button>
-                </Link>
+                <Button className="purple-button" onClick={() => handleReserveClick(cls)}>
+                  RESERVE
+                </Button>
               </Card.Body>
             </Card>
           ))}

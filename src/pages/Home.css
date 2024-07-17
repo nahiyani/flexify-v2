@@ -195,7 +195,7 @@
 }
 
 img {
-  margin: -25px -75px auto;
+  margin: -25px -85px auto;
   width: 250px; /* Ensures the image covers the width */
   height: 250px; /* Ensures the image covers the height */
   object-fit: cover; /* Ensures the image covers the div without distortion */

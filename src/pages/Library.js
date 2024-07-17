@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Button, Form, Carousel } from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Library.css';
 import { Helmet } from 'react-helmet';
+import { useLocation } from 'react-router-dom';
 
 import articleImage1 from '../images/article1.webp';
 import articleImage2 from '../images/article2.webp';
@@ -12,6 +13,15 @@ import guideImage1 from '../images/guide1.webp';
 import guideImage2 from '../images/guide2.webp';
 import guideImage3 from '../images/guide3.webp';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const Library = () => {
   const [bmi, setBmi] = useState(null);
@@ -92,6 +102,7 @@ const Library = () => {
         <title>Library - Flexify</title>
         <meta name="description" content="This is a detailed description of the page." />
       </Helmet>
+      <ScrollToTop />
       <Header />
       <div className="library-container">
         <div className='library-intro'>
