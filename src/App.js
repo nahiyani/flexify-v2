@@ -6,6 +6,7 @@ import Classes from './pages/Classes';
 import Instructors from './pages/Instructors';
 import Library from './pages/Library';
 import Reserve from './pages/Reserve';
+import FAQ from './pages/faq'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/instructors' element={<Instructors />} />
           <Route path='/library' element={<Library />} />
           <Route path='/reserve' element={<Reserve />} />
+          <Route path='/faq' element={<FAQ />} />
         </Routes>
       </BrowserRouter>
     </div>

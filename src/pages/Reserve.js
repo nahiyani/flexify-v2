@@ -4,8 +4,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
 import './Reserve.css';
 import { classNames } from '../data';
 import { Helmet } from 'react-helmet';
@@ -19,7 +17,7 @@ function ScrollToTop() {
     }, [pathname]);
   
     return null;
-}
+  }
 
 const Reserve = () => {
   const location = useLocation();
@@ -98,8 +96,8 @@ const Reserve = () => {
         }
         break;
       case 'phoneNumber':
-        if (!/^\d{10}$/.test(value.replace(/\D/g, ''))) {
-          newErrors.phoneNumber = 'Please enter a valid phone number';
+        if (!/^\d{3}-\d{3}-\d{4}$/.test(value)) {
+          newErrors.phoneNumber = 'Please enter a valid phone number (XXX-XXX-XXXX)';
         } else {
           delete newErrors.phoneNumber;
         }
@@ -180,9 +178,14 @@ const Reserve = () => {
     }
   };
 
-  const handlePhoneNumberChange = (value) => {
-    setPhoneNumber(value);
-    validateField('phoneNumber', value);
+  const handlePhoneNumberChange = (event) => {
+    let { value } = event.target;
+    value = value.replace(/\D/g, '').substring(0, 10);
+    const formattedInput = value.replace(/(\d{3})(\d{1,3})?(\d{1,4})?/, (match, g1, g2, g3) =>
+      g2 ? (g3 ? `${g1}-${g2}-${g3}` : `${g1}-${g2}`) : g1
+    );
+    setPhoneNumber(formattedInput);
+    validateField('phoneNumber', formattedInput);
   };
 
   const handleCardNumberChange = (event) => {
@@ -359,20 +362,10 @@ const Reserve = () => {
             <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
           </Form.Group>
           <Form.Group controlId="formPhoneNumber" className="form-group-spacing">
-  <Form.Label className="form-title required-field">Phone Number</Form.Label>
-  <PhoneInput
-    country={'ca'}
-    value={phoneNumber}
-    onChange={handlePhoneNumberChange}
-    inputStyle={{ 
-      width: '100%', 
-      fontFamily: 'Poppins, sans-serif', // Custom font style
-      fontSize: '16px' // Optional: adjust the font size
-    }}
-    isInvalid={!!errors.phoneNumber}
-  />
-  <Form.Control.Feedback type="invalid">{errors.phoneNumber}</Form.Control.Feedback>
-</Form.Group>
+            <Form.Label className="form-title required-field">Phone Number</Form.Label>
+            <Form.Control type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required value={phoneNumber} onChange={handlePhoneNumberChange} isInvalid={!!errors.phoneNumber} />
+            <Form.Control.Feedback type="invalid">{errors.phoneNumber}</Form.Control.Feedback>
+          </Form.Group>
           {price && (
             <div className="text-center mb-3">
               <div className="text-center mb-3">
