@@ -108,7 +108,13 @@
 
 .class-card .class-card-content {
     display: flex;
-    align-items: center;
+    flex-direction: row; /* Ensure items are laid out in a row */
+    align-items: flex-start; /* Align items to the start (left) */
+    justify-content: flex-start; /* Justify content to the start (left) */
+}
+
+.card-text{
+    text-align: left;
 }
 
 .class-card .class-image-placeholder {
@@ -117,6 +123,7 @@
     margin-right: 20px;
     border-radius: 15px;
     overflow: hidden; 
+    margin-top: 3%;
 }
 
 .class-card .class-image-placeholder img {

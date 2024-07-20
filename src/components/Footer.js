@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faFacebookF, faYoutube, faTiktok, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import './Footer.css';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  
+  const { t } = useTranslation();
+  
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -75,7 +79,7 @@ const Footer = () => {
               </Col>
             </Row>
           </Col>
-          <Col md={3} className="footer-section">
+          <Col md={3} className="footer-section last-column">
             <h5>Questions?</h5>
             <p>
               Email: info@tutorease.com<br />

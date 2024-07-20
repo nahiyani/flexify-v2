@@ -9,6 +9,11 @@
   margin-bottom: 20px;
 }
 
+.last-column p{
+  text-align: left;
+  padding: 0;
+}
+
 .footer h5 {
   font-weight: 700;
   margin-bottom: 20px;

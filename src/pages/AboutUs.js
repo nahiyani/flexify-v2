@@ -64,10 +64,10 @@ const AboutUs = () => {
       </Helmet>
       <ScrollToTop />
       <Header />
-      <div className="about-container">
+      <main className="about-container">
         <div className="flexify-advantage">
-          <h2>THE FLEXIFY ADVANTAGE</h2>
-          <div className="accordion">
+          <h2 id="flexify-advantage-heading">THE FLEXIFY ADVANTAGE</h2>
+          <div className="accordion" aria-labelledby="flexify-advantage-heading" role="region">
             {accordionItems.map((item, index) => (
               <AccordionItem
                 key={index}
@@ -94,9 +94,9 @@ const AboutUs = () => {
         </div>
 
         <div className="meet-the-executives">
-          <h2>MEET THE EXECUTIVES</h2>
-          <div className="executives">
-            <div className="executive-card">
+          <h2 id="meet-the-executives-heading">MEET THE EXECUTIVES</h2>
+          <div className="executives" aria-labelledby="meet-the-executives-heading" role="region">
+            <div className="executive-card" role="article">
               <div className="executive-photo">
                 <img src={theRock} alt="Dwayne Johnson" />
               </div>
@@ -110,7 +110,7 @@ const AboutUs = () => {
                 fuels his success.
               </p>
             </div>
-            <div className="executive-card">
+            <div className="executive-card" role="article">
               <div className="executive-photo">
                 <img src={ryanReynolds} alt="Ryan Reynolds" />
               </div>
@@ -124,7 +124,7 @@ const AboutUs = () => {
                 fitness experiences to users.
               </p>
             </div>
-            <div className="executive-card">
+            <div className="executive-card" role="article">
               <div className="executive-photo">
                 <img src={tomBrady} alt="Tom Brady" />
               </div>
@@ -140,7 +140,7 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
-      </div>
+      </main>
       <Footer />
     </div>
   );

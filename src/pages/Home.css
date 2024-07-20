@@ -6,12 +6,18 @@
   font-size: 65px !important;
 }
 
+.language-switcher-container {
+  position: absolute;
+  left: 10px;
+  border-radius: 10px;
+}
+
 .hero-section {
   position: relative;
   background-image: url('../images/hompage-image.webp');
   background-size: cover;
   background-position: center;
-  height: 600px;
+  height: 675px;
   padding: 50px 20px;
   color: white;
 }
@@ -81,13 +87,14 @@
   position: relative;
   border-radius: 15px;
   overflow: hidden;
+  text-align: center;
 }
 
 .featured-class-image {
   width: 90%;
   height: 200px;
   object-fit: cover;
-  margin: 20px auto 0; /* Center the image and add padding on top */
+  margin: 20px auto 0;
   border-radius: 15px;
 }
 
@@ -115,6 +122,7 @@
   overflow: hidden;
   background-color: #8E46C6;
   color: white;
+  text-align: center;
 }
 
 .instructor-image {
@@ -123,6 +131,7 @@
   object-fit: cover;
   border-bottom: 2px solid #8E46C6;
   margin: 0 auto;
+  border-radius: 15px;
 }
 
 .instructor-card .card-body {
@@ -196,12 +205,16 @@
 
 img {
   margin: -25px -85px auto;
-  width: 250px; /* Ensures the image covers the width */
-  height: 250px; /* Ensures the image covers the height */
-  object-fit: cover; /* Ensures the image covers the div without distortion */
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
   margin-right: 20%;
 }
 
 .testimony-section .blockquote {
+  text-align: left;
+}
+
+.testimony-text {
   text-align: left;
 }
