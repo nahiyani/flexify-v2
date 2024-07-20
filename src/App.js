@@ -11,7 +11,7 @@ import FAQ from './pages/faq'
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename='/flexify-v2'> 
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<AboutUs />} /> 
