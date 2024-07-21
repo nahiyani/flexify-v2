@@ -59,6 +59,10 @@
   margin-bottom: 25px;
 }
 
+.hero-text-stuff {
+  width: 75%;
+}
+
 .main-header {
   font-size: 2.5em;
   font-weight: bold;
@@ -193,7 +197,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 30px 0;
+  padding: 20px 30px 0;
   background-color: #f8f9fa;
 }
 
@@ -217,4 +221,89 @@ img {
 
 .testimony-text {
   text-align: left;
+}
+
+.join-community-title {
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 50px;
+  width: 75%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.join-section {
+  background-color: #fff;
+  color: #000;
+  padding: 40px 0;
+}
+
+.join-section h2 {
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.join-form {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+.interests-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.interest-button {
+  height: 40px;
+  margin-top: 10px;
+  background-color: #ffffff !important;
+  color: #8E46C6 !important;
+  border: 2px solid #8E46C6 !important;
+}
+
+.interest-button.selected {
+  background-color: #8E46C6 !important; /* Light purple color for selected interests */
+  color: white !important;
+  border: none !important;
+}
+
+.text-danger {
+  margin-top: 10px;
+}
+
+button[variant='primary'],
+button[variant='selected'] {
+  background-color: #8E46C6 !important;
+  border-color: #8E46C6 !important;
+}
+
+button[variant='outline-primary'],
+button[variant='unselected'] {
+  color: #8E46C6 !important;
+  border-color: #8E46C6 !important;
+  background-color: #ffffff !important;
+}
+
+.success-modal .modal-content {
+  background-color: #d4edda; /* Green background */
+  color: #155724; /* Dark green text */
+}
+
+.success-modal .modal-header,
+.success-modal .modal-footer {
+  border: none;
+}
+
+.row {
+  padding-bottom: 15px;
+}
+
+.interests-row {
+  padding-bottom: 10px;
 }

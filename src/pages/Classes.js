@@ -306,7 +306,7 @@ const Classes = () => {
             </Dropdown>
           </div>
           <div className="facet">
-            <div className="facet-header">Price Range</div>
+            <div className="facet-header">Price</div>
             {priceRanges.map((range) => (
               <Form.Check
                 key={range.label}

@@ -44,7 +44,7 @@ const AboutUs = () => {
   const accordionItems = [
     {
       title: 'COMPREHENSIVE CLASS VARIETY',
-      content: 'Flexify offers a wide range of fitness classes that cater to all levels, including yoga, pilates, HIIT, and strength training. This diverse selection ensures users can find the right fit to meet their fitness goals and stay engaged with their workout routine.'
+      content: 'Flexify offers a wide range of fitness classes that cater to all levels, including yoga, pilates, High Intensity Interval Training (HIIT), and strength training. This diverse selection ensures users can find the right fit to meet their fitness goals and stay engaged with their workout routine.'
     },
     {
       title: 'EXPERT INSTRUCTORS',

@@ -124,10 +124,10 @@ const Library = () => {
                 <Card.Title className="article-title">
                   Get Off Your “Buts” — Ideas To Get Or Maintain Your Fitness Motivation
                 </Card.Title>
-                <Card.Text className="article-description black-text">
+                <div className="article-description black-text">
                   Everyone would like a fitness solution in a bottle or a pill; take one pill and devour a slice of pizza without worrying about gaining an ounce.
                   One little sip of a special elixir and off to the beach with your six-pack abs...
-                </Card.Text>
+                </div>
                 <Button className="learn-more-btn" href='https://medium.com/long-sweet-valuable/get-off-your-buts-ideas-to-get-or-maintain-your-fitness-motivation-279c739f9a7a'>
                   Learn More
                 </Button>
@@ -140,9 +140,9 @@ const Library = () => {
               ></div>
               <Card.Body className="text-center">
                 <Card.Title className="article-title">Rowing Machines: The Ultimate Guide to Full-Body Fitness</Card.Title>
-                <Card.Text className="article-description black-text">
+                <div className="article-description black-text">
                 Rowing machines, also known as ergometers or “ergs,” have gained significant popularity in recent years as one of the most effective pieces of fitness equipment for a full-body workout. Combining...
-                </Card.Text>
+                </div>
                 <Button className="learn-more-btn" href='https://medium.com/@mdanwarmorshed70/rowing-machines-the-ultimate-guide-to-full-body-fitness-dced129145c1'>Learn More</Button>
               </Card.Body>
             </div>
@@ -153,9 +153,9 @@ const Library = () => {
               ></div>
               <Card.Body className="text-center">
                 <Card.Title className="article-title">Crush Your Fitness Goals: Build Strength and Endurance in 4 Weeks</Card.Title>
-                <Card.Text className="article-description black-text">
+                <div className="article-description black-text">
                 Ever dreamed of feeling stronger, more resilient, and ready to tackle any physical challenge life throws at you? Whether it’s lifting that heavy box without wincing or running up the stairs without gasping for air,...
-                </Card.Text>
+                </div>
                 <Button className="learn-more-btn" href='https://medium.com/venturehq/crush-your-fitness-goals-how-to-build-strength-and-endurance-in-4-weeks-afe7d796e725'>Learn More</Button>
               </Card.Body>
             </div>
@@ -174,7 +174,7 @@ const Library = () => {
               ></div>
                 <Card.Body className="text-center">
                   <Card.Title className='guide-title'>The Definitive Guide to Healthy Eating in Real Life</Card.Title>
-                  <Card.Text>To eat healthier, start by making small changes. Make each meal or snack contain nutrient-dense foods, and try to avoid processed foods...</Card.Text>
+                  <div className='guide-text'>To eat healthier, start by making small changes. Make each meal or snack contain nutrient-dense foods, and try to avoid processed foods...</div>
                   <Button className="learn-more-guides-btn" href='https://www.healthline.com/nutrition/how-to-eat-healthy-guide'>Learn More</Button>
                 </Card.Body>
               </Card>
@@ -187,7 +187,7 @@ const Library = () => {
               ></div>
                 <Card.Body className="text-center">
                   <Card.Title className='guide-title'>Why Spending Just Two Hours a Week in Nature Is Good for You</Card.Title>
-                  <Card.Text>Recent research has found clear evidence that going for a hike can help your health....</Card.Text>
+                  <div className='guide-text'>Recent research has found clear evidence that going for a hike can help your health....</div>
                   <Button className="learn-more-guides-btn">Learn More</Button>
                 </Card.Body>
               </Card>
@@ -200,7 +200,7 @@ const Library = () => {
               ></div>
                 <Card.Body className="text-center">
                   <Card.Title className='guide-title'>The 8 Best Waterproof Fitness Trackers</Card.Title>
-                  <Card.Text>Fitness trackers not only monitor your daily activity levels but also may help you take control of your health with features like...</Card.Text>
+                  <div className='guide-text'>Fitness trackers not only monitor your daily activity levels but also may help you take control of your health with features like...</div>
                   <Button className="learn-more-guides-btn">Learn More</Button>
                 </Card.Body>
               </Card>

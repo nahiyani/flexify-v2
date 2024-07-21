@@ -28,10 +28,12 @@ body {
 
 .articles-section {
   background-color: #8E46C6;
+  text-align: center;
 }
 
 .podcasts-section {
   background-color: #8E46C6;
+  text-align: center;
 }
 
 .articles-section,
@@ -144,6 +146,11 @@ body {
 .guides-section {
   background-color: #fff;
   color: #000;
+  text-align: center;
+}
+
+.guide-text{
+  padding-bottom: 10px;
 }
 
 .guides-carousel {
@@ -280,11 +287,12 @@ body {
   border-radius: 10px;
   width: 50%;
   margin: 20px auto;
+  font-weight: bold;
 }
 
 .bmi-number {
   color: white;
-  font-size: 3rem;
+  font-size: 75px;
   font-weight: bold;
 }
 
