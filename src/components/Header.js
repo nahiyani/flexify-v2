@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
 
-import logoImage from '../images/flexifylogo.png'; // Replace with your actual image path
+import logoImage from '../images/flexifylogo.png'; 
 
 const Header = () => {
   return (
@@ -13,8 +13,6 @@ const Header = () => {
         <Navbar.Brand as={Link} to="/" className="brand">
           <img
             src={logoImage}
-            width="auto"
-            height="30"
             className="d-inline-block align-top logo-image"
             alt="Flexify Logo"
           />
@@ -35,3 +33,4 @@ const Header = () => {
 };
 
 export default Header;
+
