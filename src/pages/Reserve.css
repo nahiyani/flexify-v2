@@ -82,7 +82,7 @@ body {
 
 .date-picker-container {
     margin-bottom: 30px; 
-    margin-top: 20px; /* Add margin-top to move down the circles section */
+    margin-top: 20px; 
 }
 
 .date-picker-container .form-title {
@@ -96,7 +96,7 @@ body {
 
 .time-picker-container {
     margin-bottom: 30px; 
-    margin-top: 20px; /* Add margin-top to move down the circles section */
+    margin-top: 20px; 
 }
 
 .time-picker-container .form-title {
@@ -111,7 +111,7 @@ body {
 .expiry-cvv-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px; /* Adjust this value to set the space between the fields */
+    gap: 20px; 
 }
 
 .expiry-cvv-container .form-group {

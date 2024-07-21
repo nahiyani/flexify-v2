@@ -293,7 +293,7 @@ const Reserve = () => {
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
-                setSelectedClass(null); // Allow backspacing to clear selection
+                setSelectedClass(null); 
                 setDropdownVisible(true);
               }}
               onFocus={() => setDropdownVisible(true)}

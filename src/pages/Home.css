@@ -268,7 +268,7 @@ img {
 }
 
 .interest-button.selected {
-  background-color: #8E46C6 !important; /* Light purple color for selected interests */
+  background-color: #8E46C6 !important; 
   color: white !important;
   border: none !important;
 }
@@ -291,8 +291,8 @@ button[variant='unselected'] {
 }
 
 .success-modal .modal-content {
-  background-color: #d4edda; /* Green background */
-  color: #155724; /* Dark green text */
+  background-color: #d4edda;
+  color: #155724; 
 }
 
 .success-modal .modal-header,
