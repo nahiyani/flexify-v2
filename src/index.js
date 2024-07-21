@@ -9,7 +9,7 @@ import './hometranslation';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/flexify-v2">  // Set the basename
+    <BrowserRouter basename="/flexify-v2">
       <App />
     </BrowserRouter>
   </React.StrictMode>
