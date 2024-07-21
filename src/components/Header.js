@@ -3,12 +3,10 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
-import { useTranslation } from 'react-i18next';
 
 import logoImage from '../images/flexifylogo.png'; // Replace with your actual image path
 
 const Header = () => {
-  const { t } = useTranslation();
   return (
     <Navbar className="main-nav navbar navbar-expand-lg" expand="lg" role="navigation" aria-label="Main navigation">
       <Container fluid>
