@@ -221,7 +221,7 @@ const Library = () => {
             <div className="podcast-card">
               <iframe src="https://open.spotify.com/embed/track/3KHzOmsIxm1J6qbj5WyjWF?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
-          </div>\
+          </div>
           <Button className="explore-all-articles-btn" href='https://open.spotify.com/playlist/5eSePKblc8XU3iPc4x7eCN'>Explore All Podcasts</Button>
         </div>
 

@@ -4,15 +4,13 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
 
-import logoImage from '../images/flexifylogo.png'; 
-
 const Header = () => {
   return (
     <Navbar className="main-nav navbar navbar-expand-lg" expand="lg" role="navigation" aria-label="Main navigation">
       <Container fluid>
         <Navbar.Brand as={Link} to="/" className="brand">
           <img
-            src={logoImage}
+            src={`${process.env.PUBLIC_URL}/flexify-logo.png`}
             className="d-inline-block align-top logo-image"
             alt="Flexify Logo"
           />
@@ -33,4 +31,5 @@ const Header = () => {
 };
 
 export default Header;
+
 

@@ -6,7 +6,9 @@
     <script type="text/javascript">
       var pathname = window.location.pathname;
       var redirectTo = pathname.startsWith('/flexify-v2') ? pathname : '/flexify-v2' + pathname;
-      window.location.replace(window.location.origin + redirectTo);
+      if (redirectTo !== pathname) {
+        window.location.replace(window.location.origin + redirectTo);
+      }
     </script>
   </head>
   <body>
